@@ -54,13 +54,27 @@ def detection(stream):
 
     # ランドマークの描画
     for landmark in landmarks:
-        for points in landmark:
+        # まゆ
+        # for points in landmark[18:27]:
+        #     cv2.drawMarker(
+        #         img, (points[0], points[1]), (21, 255, 12))
+
+        # 鼻
+        # for points in landmark[28:31]:
+        #     cv2.drawMarker(
+        #         img, (points[0], points[1]), (21, 255, 12))
+        nose_sp = (landmark[28][0], landmark[28][1])
+        nose_ep = (landmark[30][0], landmark[30][1])
+        img = cv2.line(img, nose_sp, nose_ep, (255, 0, 0), 5)
+
+        # 口
+        for points in landmark[49:60]:
             cv2.drawMarker(
-                img, (points[0], points[1]), (21, 255, 12, 100))
+                img, (points[0], points[1]), (21, 255, 12))
 
     result, dst_data = cv2.imencode('.png', img)
 
-    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 
