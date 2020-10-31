@@ -1,4 +1,7 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import MediaQuery from "react-responsive";
+import SlideMenu from "../components/slidemenu";
+import Header from "../components/header";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -18,9 +21,6 @@ export default function VideoFeed() {
     const dummyCanvasElement = dummycanvasEl.current;
     const dummyCanvas = dummyCanvasElement.getContext("2d");
 
-    canvasElement.height = video.videoHeight;
-    canvasElement.width = video.videoWidth;
-
     dummyCanvasElement.height = video.videoHeight;
     dummyCanvasElement.width = video.videoWidth;
 
@@ -31,12 +31,7 @@ export default function VideoFeed() {
       dummyCanvasElement.width,
       dummyCanvasElement.height
     );
-    // let imageData = canvas.getImageData(
-    //   0,
-    //   0,
-    //   canvasElement.width,
-    //   canvasElement.height
-    // );
+
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
@@ -88,11 +83,26 @@ export default function VideoFeed() {
     });
   }, [videoEl]);
 
+  const [isMenuShown, setMenuShown] = useState(false);
+  const toggle = () => {
+    setMenuShown(!isMenuShown);
+  };
+
   return (
     <div>
-      <video ref={videoEl} />
-      <canvas ref={canvasEl} />
-      <canvas ref={dummycanvasEl} />
+      <Header isMenuShown={isMenuShown} toggle={toggle} />
+      <MediaQuery query="(max-width: 870px)">
+        {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
+      </MediaQuery>
+      <div style={{ textAlign: "center" }}>
+        <video ref={videoEl} />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <canvas ref={canvasEl} width="640" height="480" />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <canvas ref={dummycanvasEl} width="0" height="0" />
+      </div>
     </div>
   );
 }
