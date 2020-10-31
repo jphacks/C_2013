@@ -55,9 +55,31 @@ def detection(stream):
     # ランドマークの描画
     for landmark in landmarks:
         # まゆ
-        # for points in landmark[18:27]:
-        #     cv2.drawMarker(
-        #         img, (points[0], points[1]), (21, 255, 12))
+        for points in landmark[18:27]:
+            # cv2.drawMarker(
+            #     img, (points[0], points[1]), (21, 255, 12))
+            img = cv2.line(img, (points[0], points[1]-10),
+                           (points[0], points[1]-10), (21, 255, 12), 5)
+            img = cv2.line(img, (points[0], points[1]+10),
+                           (points[0], points[1]+10), (21, 255, 12), 5)
+
+        # 眉をかく
+        # mayu_sp = (landmark[18][0], landmark[18][1])
+        # mayu_ep = (landmark[26][0], landmark[26][1])
+        # img = cv2.line(img, mayu_sp, mayu_ep, (255, 0, 0), 5)
+
+        # 画像貼り付け
+        # mayu_img = cv2.imread(
+        #     './template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
+
+        # b_channel, g_channel, r_channel = cv2.split(img)
+        # alpha_channel = np.ones(b_channel.shape, dtype=b_channel.dtype) * 50
+        # img = cv2.merge((b_channel, g_channel, r_channel, alpha_channel))
+
+        # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+
+        # height, width = mayu_img.shape[:2]
+        # img[100:height + 100, 200:width + 200] = mayu_img
 
         # 鼻
         # for points in landmark[28:31]:
