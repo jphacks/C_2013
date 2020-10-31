@@ -12,6 +12,11 @@ const StyledDiv = styled.div({
     margin: "0 auto",
     letterSpacing: "10px",
     textAlign: "center",
+    transition: "all 1s",
+    ":hover": {
+        backgroundColor: "transparent",
+        transition: "all 1s"
+    }
 })
 
 const StartButton = () => {

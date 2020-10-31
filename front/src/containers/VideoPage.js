@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Header from "../components/header";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -82,6 +83,7 @@ export default function VideoFeed() {
 
   return (
     <div>
+      <Header />
       <video ref={videoEl} />
       <canvas ref={canvasEl} width="640" height="480" />
       <canvas ref={dummycanvasEl} width="0" height="0" />
