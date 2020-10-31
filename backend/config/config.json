@@ -1,0 +1,6 @@
+{
+    "CASCADEPASS": "./haarcascades/",
+    "CASCADE": "haarcascade_frontalface_default.xml",
+    "LEARNEDMODELPATH": "./learned-models/",
+    "LEARNEDMODEL": "shape_predictor_68_face_landmarks.dat"
+}
