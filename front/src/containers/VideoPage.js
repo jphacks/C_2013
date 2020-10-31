@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -18,9 +18,6 @@ export default function VideoFeed() {
     const dummyCanvasElement = dummycanvasEl.current;
     const dummyCanvas = dummyCanvasElement.getContext("2d");
 
-    canvasElement.height = video.videoHeight;
-    canvasElement.width = video.videoWidth;
-
     dummyCanvasElement.height = video.videoHeight;
     dummyCanvasElement.width = video.videoWidth;
 
@@ -31,12 +28,7 @@ export default function VideoFeed() {
       dummyCanvasElement.width,
       dummyCanvasElement.height
     );
-    // let imageData = canvas.getImageData(
-    //   0,
-    //   0,
-    //   canvasElement.width,
-    //   canvasElement.height
-    // );
+
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
@@ -91,8 +83,8 @@ export default function VideoFeed() {
   return (
     <div>
       <video ref={videoEl} />
-      <canvas ref={canvasEl} />
-      <canvas ref={dummycanvasEl} />
+      <canvas ref={canvasEl} width="640" height="480" />
+      <canvas ref={dummycanvasEl} width="0" height="0" />
     </div>
   );
 }
