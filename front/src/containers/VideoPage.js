@@ -92,7 +92,7 @@ export default function VideoFeed() {
     <div>
       <video ref={videoEl} />
       <canvas ref={canvasEl} />
-      {/* <canvas ref={dummycanvasEl} /> */}
+      <canvas ref={dummycanvasEl} />
     </div>
   );
 }
