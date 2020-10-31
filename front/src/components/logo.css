@@ -1,6 +1,6 @@
 .rhombus {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     transform: rotateZ(45deg);
     border: solid 5px white;
     margin: 0 auto;
@@ -11,10 +11,10 @@
 }
 
 .circle {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    transform: translateY(-170px);
+    transform: translateY(-135px);
     border: solid 5px white;
     margin: 0 auto;
     animation-name: rotate-circle;
@@ -34,9 +34,9 @@
 }
 @keyframes rotate-circle {
     0% {
-        transform: rotateY(0deg) translateY(-170px);
+        transform: rotateY(0deg) translateY(-135px);
     }
     100% {
-        transform: rotateY(180deg) translateY(-170px);
+        transform: rotateY(180deg) translateY(-135px);
     }
 }

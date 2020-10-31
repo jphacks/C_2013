@@ -9,7 +9,7 @@ const StyledDiv = styled.div({
     fontSize: "50px",
     width: "300px",
     color: "white",
-    margin: "0 auto",
+    margin: "0 auto 50px auto",
     letterSpacing: "10px",
     textAlign: "center",
     transition: "all 1s",
