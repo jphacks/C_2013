@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 import io
 import base64
 
-from detect import main
+from middleware.detect import detection
 
 app = Flask(__name__)
 
@@ -15,10 +15,8 @@ def hello_world():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-    # stream = request.files['file'].stream
-    # dst_data = main(stream)
     img = request.json['file'].encode()
-    dst_data = main(img)
+    dst_data = detection(img)
     encoded_string = base64.b64encode(dst_data).decode()
     return jsonify({'image': encoded_string})
 
