@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  ci:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,8 +19,8 @@ jobs:
         run: |
           npm install -g prettier
       - name: Run Prettier
-        run: prettier --write '**/*.{css,html,js}'
-        working-directory: ./front/src
+        run: prettier --write '{src,__tests__}/**/*.{ts,tsx,js,jsx}'
+        working-directory: ./front
 
       - name: Commit format
         uses: stefanzweifel/git-auto-commit-action@v4
