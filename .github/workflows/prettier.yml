@@ -20,7 +20,7 @@ jobs:
           npm install -g prettier
       - name: Run Prettier
         run: prettier --write '**/*.{css,html,js}'
-        working-directory: ./src
+        working-directory: ./front/src
 
       - name: Commit format
         uses: stefanzweifel/git-auto-commit-action@v4
