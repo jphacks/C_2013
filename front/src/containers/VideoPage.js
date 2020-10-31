@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 
-const LOOP_WAIT_TIME = 500;
+const LOOP_WAIT_TIME = 250;
 
 export default function VideoFeed() {
   const canvasEl = useRef(null);
-  const dummyCanvasEl = useRef(null);
+  const dummycanvasEl = useRef(null);
   const videoEl = useRef(null);
   const [loopInvoke, setLoopInvoke] = useState(false);
   const [count, setCount] = useState(0);
@@ -15,7 +15,7 @@ export default function VideoFeed() {
     const canvasElement = canvasEl.current;
     const canvas = canvasElement.getContext("2d");
 
-    const dummyCanvasElement = dummyCanvasEl.current;
+    const dummyCanvasElement = dummycanvasEl.current;
     const dummyCanvas = dummyCanvasElement.getContext("2d");
 
     canvasElement.height = video.videoHeight;
@@ -28,8 +28,8 @@ export default function VideoFeed() {
       video,
       0,
       0,
-      canvasElement.width,
-      canvasElement.height
+      dummyCanvasElement.width,
+      dummyCanvasElement.height
     );
     // let imageData = canvas.getImageData(
     //   0,
@@ -37,7 +37,9 @@ export default function VideoFeed() {
     //   canvasElement.width,
     //   canvasElement.height
     // );
-    const dataURI = dummyCanvasElement.toDataURL().replace(/^.*,/, "");
+    const dataURI = dummyCanvasElement
+      .toDataURL("image/png", 0.5)
+      .replace(/^.*,/, "");
     const img_data = await postData(dataURI);
 
     //画像オブジェクトを生成
@@ -88,9 +90,9 @@ export default function VideoFeed() {
 
   return (
     <div>
-      <video ref={videoEl} height="500" />
+      <video ref={videoEl} />
       <canvas ref={canvasEl} />
-      <canvas ref={dummyCanvasEl} />
+      {/* <canvas ref={dummycanvasEl} /> */}
     </div>
   );
 }
