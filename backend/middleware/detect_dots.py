@@ -64,7 +64,7 @@ def detect_dots(stream):
 
     result, dst_data = cv2.imencode('.png', img_BGRA)
 
-    cv2.imwrite("./result/{}.png".format(str(time.time())), img_BGRA)
+    # cv2.imwrite("./result/{}.png".format(str(time.time())), img_BGRA)
 
     return dst_data
 
