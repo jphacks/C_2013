@@ -44,23 +44,27 @@ def facemark(gray_img):
     return landmarks
 
 
-def detection(stream):
+def detect_dots(stream):
     img_binary = base64.b64decode(stream)
-    img_array = np.frombuffer(img_binary, dtype=np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    jpg = np.frombuffer(img_binary, dtype=np.uint8)
+    img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 処理を早くするためグレースケールに変換
     landmarks = facemark(gray)  # ランドマーク検出
+
+    b_channel, g_channel, r_channel = cv2.split(img)
+    alpha_channel = np.zeros(b_channel.shape, dtype=b_channel.dtype)
+    img_BGRA = cv2.merge((b_channel, g_channel, r_channel, alpha_channel))
 
     # ランドマークの描画
     for landmark in landmarks:
         for points in landmark:
             cv2.drawMarker(
-                img, (points[0], points[1]), (21, 255, 12, 100))
+                img_BGRA, (points[0], points[1]), (21, 255, 12, 100))
 
-    result, dst_data = cv2.imencode('.png', img)
+    result, dst_data = cv2.imencode('.png', img_BGRA)
 
-    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    cv2.imwrite("./result/{}.png".format(str(time.time())), img_BGRA)
 
     return dst_data
 

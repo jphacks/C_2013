@@ -5,6 +5,7 @@ import os
 import base64
 
 from middleware.detect import detection
+from middleware.detect_dots import detect_dots
 
 app = Flask(__name__)
 
@@ -20,6 +21,15 @@ def upload():
     dst_data = detection(img)
     encoded_string = base64.b64encode(dst_data).decode()
     return jsonify({'image': encoded_string})
+
+
+@app.route("/detect_dots", methods=["POST"])
+def detect_dot():
+    img = request.json['file'].encode()
+    dst_data = detect_dots(img)
+    encoded_string = base64.b64encode(dst_data).decode()
+
+    return jsonify({'dots': encoded_string})
 
 
 if __name__ == "__main__":
