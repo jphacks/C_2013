@@ -1,23 +1,21 @@
-import logo from "../logo.svg";
-import "../App.css";
+import React from "react";
+import MediaQuery from "react-responsive";
+import Navbar from "./navbar";
+import HomeButton from "./homebutton";
+import MenuButton from "./menubutton";
 
-function Header() {
+function Header({ toggle }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello!, Learn React!!!
-        </a>
-      </header>
+    <div style={{ height: "200px" }}>
+      <HomeButton />
+
+      <MediaQuery query="(max-width: 870px)">
+        <MenuButton toggle={toggle} />
+      </MediaQuery>
+
+      <MediaQuery query="(min-width: 871px)">
+        <Navbar />
+      </MediaQuery>
     </div>
   );
 }

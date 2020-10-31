@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import MediaQuery from "react-responsive";
+import SlideMenu from "../components/slidemenu";
+import Header from "../components/header";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -80,11 +83,26 @@ export default function VideoFeed() {
     });
   }, [videoEl]);
 
+  const [isMenuShown, setMenuShown] = useState(false);
+  const toggle = () => {
+    setMenuShown(!isMenuShown);
+  };
+
   return (
     <div>
-      <video ref={videoEl} />
-      <canvas ref={canvasEl} width="640" height="480" />
-      <canvas ref={dummycanvasEl} width="0" height="0" />
+      <Header isMenuShown={isMenuShown} toggle={toggle} />
+      <MediaQuery query="(max-width: 870px)">
+        {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
+      </MediaQuery>
+      <div style={{ textAlign: "center" }}>
+        <video ref={videoEl} />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <canvas ref={canvasEl} width="640" height="480" />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <canvas ref={dummycanvasEl} width="0" height="0" />
+      </div>
     </div>
   );
 }
