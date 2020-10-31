@@ -1,9 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Header from "./components/header";
+import VideoFeed from "./containers/VideoPage";
 
 function App() {
-  return <Header />;
+  return (
+    <div className="App">
+      <VideoFeed></VideoFeed>
+    </div>
+  );
 }
 
 export default App;
