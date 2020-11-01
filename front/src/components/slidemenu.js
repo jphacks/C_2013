@@ -1,4 +1,5 @@
 import React from "react";
+import "./slidemenu.css";
 import SlideMenuButton from "./slidemenubutton";
 
 const menus = ["EYEBROW", "LIP", "NOSE"];
