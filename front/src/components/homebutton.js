@@ -8,16 +8,16 @@ const StyledDiv = styled.div({
   border: "4px solid pink",
   transform: "rotateZ(45deg) translateX(40px)",
   margin: "20px 50px",
-  textAlign: "center"
-})
+  textAlign: "center",
+});
 
 const StyledP = styled.p({
   color: "rgba(0, 0, 0, 0.5)",
   fontFamily: "book",
   fontSize: "30px",
   transform: "rotateZ(-45deg) translateX(-37px) translateY(8px)",
-  letterSpacing: "7px"
-})
+  letterSpacing: "7px",
+});
 
 const HomeButton = () => {
   return (

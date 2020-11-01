@@ -55,12 +55,15 @@ export default function VideoFeed() {
     const message = {
       "/video/EYEBROW": "/mayu",
       "/video/LIP": "/lip",
-      "/video/NOSE": "/nose"
-    }
+      "/video/NOSE": "/nose",
+    };
     await fetch(message[endpoint], {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: endpoint === "/video/LIP" ? JSON.stringify({ ...body, lip: "normal" }) : JSON.stringify(body),
+      body:
+        endpoint === "/video/LIP"
+          ? JSON.stringify({ ...body, lip: "normal" })
+          : JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
