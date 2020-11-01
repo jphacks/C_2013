@@ -3,6 +3,7 @@ import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
 import Header from "../components/header";
 import Direction from "../components/direction";
+import LipMenu from "../components/lipmenu";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -50,10 +51,16 @@ export default function VideoFeed() {
   const postData = async (input) => {
     const body = { file: input };
     let image_data = "";
-    await fetch("/upload", {
+    const endpoint = window.location.pathname;
+    const message = {
+      "/video/EYEBROW": "/mayu",
+      "/video/LIP": "/lip",
+      "/video/NOSE": "/nose"
+    }
+    await fetch(message[endpoint], {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: endpoint === "/video/LIP" ? JSON.stringify({ ...body, lip: "normal" }) : JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -96,6 +103,7 @@ export default function VideoFeed() {
         {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
       </MediaQuery>
       <Direction />
+      {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
       <div style={{ textAlign: "center" }}>
         <video ref={videoEl} />
       </div>
