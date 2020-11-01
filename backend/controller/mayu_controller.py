@@ -73,7 +73,7 @@ def mayu_handler(stream):
         img = synth_mayu_temp(mayu_img, img, landmark[21], True)  # 右眉
 
     result, dst_data = cv2.imencode('.png', img)
-    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 

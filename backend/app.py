@@ -19,16 +19,6 @@ def hello_world():
     return "Hello, World!"
 
 
-# @app.route("/upload", methods=["POST"])
-# def upload():
-#     # lip_thickness: thin or thick or normal
-#     lip_thickness = request.json['lip']
-#     img = request.json['file'].encode()
-#     dst_data = detection(img, lip_thickness)
-#     encoded_string = base64.b64encode(dst_data).decode()
-#     return jsonify({'image': encoded_string})
-
-
 @app.route("/mayu", methods=["POST"])
 def mayu():
     img = request.json['file'].encode()
