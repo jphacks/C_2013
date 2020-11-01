@@ -1,6 +1,6 @@
-models/pretrained
-models/*.pth
-haar_cascade
 img
-__pycache__
 results
+venv
+zip
+haarcascades
+learned-models

@@ -4,8 +4,12 @@ import io
 import os
 import base64
 
-from middleware.detect import detection
+# from middleware.detect import detection
+from controller.mayu_controller import mayu_handler
+from controller.lip_controller import lip_handler
 from middleware.detect_dots import detect_dots
+from controller.nose_controller import nose_handler
+
 
 app = Flask(__name__)
 
@@ -15,12 +19,28 @@ def hello_world():
     return "Hello, World!"
 
 
-@app.route("/upload", methods=["POST"])
-def upload():
+@app.route("/mayu", methods=["POST"])
+def mayu():
+    img = request.json['file'].encode()
+    dst_data = mayu_handler(img)
+    encoded_string = base64.b64encode(dst_data).decode()
+    return jsonify({'image': encoded_string})
+
+
+@app.route("/lip", methods=["POST"])
+def lip():
     # lip_thickness: thin or thick or normal
     lip_thickness = request.json['lip']
     img = request.json['file'].encode()
-    dst_data = detection(img, lip_thickness)
+    dst_data = lip_handler(img, lip_thickness)
+    encoded_string = base64.b64encode(dst_data).decode()
+    return jsonify({'image': encoded_string})
+
+
+@app.route("/nose", methods=["POST"])
+def nose():
+    img = request.json['file'].encode()
+    dst_data = nose_handler(img)
     encoded_string = base64.b64encode(dst_data).decode()
     return jsonify({'image': encoded_string})
 
