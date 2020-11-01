@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
 import Header from "../components/header";
+import Direction from "../components/direction";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -94,6 +95,7 @@ export default function VideoFeed() {
       <MediaQuery query="(max-width: 870px)">
         {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
       </MediaQuery>
+      <Direction />
       <div style={{ textAlign: "center" }}>
         <video ref={videoEl} />
       </div>
