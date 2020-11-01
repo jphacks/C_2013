@@ -20,6 +20,26 @@ LEARNED_MODEL_PATH = cfg["LEARNEDMODELPATH"]
 PREDICTOR = dlib.shape_predictor(
     LEARNED_MODEL_PATH + cfg["LEARNEDMODEL"])
 
+MOUTH_COLORS = [
+    (128, 103, 240, 255*94/100),
+    (174, 82, 217, 255*94/100),
+    (117, 74, 224, 255*88/100),
+    (102, 69, 247, 255*97/100),
+    (247, 69, 230, 255*97/100),
+    (66, 82, 237, 255*93/100),
+    (170, 52, 224, 255*88/100)
+]
+
+MOUTH_POSITIONS = [
+    (50, 51),
+    (52, 51),
+    (58, 56),
+    (48, 50),
+    (48, 58),
+    (54, 52),
+    (54, 56)
+]
+
 
 def face_position(gray_img):
     # 顔の位置を検出　return:リスト(x,y,w,h)
@@ -99,6 +119,7 @@ def resize_mayu(temp_img, mayu_len):
 
 def detection(stream):
     # imageはping!!
+    # drawlineの時のcolorは(g,b,r,a) (0<g,b,r,a,<255)
 
     img_binary = base64.b64decode(stream)
     img_array = np.frombuffer(img_binary, dtype=np.uint8)
@@ -124,13 +145,18 @@ def detection(stream):
         img = cv2.line(img, nose_sp, nose_ep, (255, 0, 0), 5)
 
         # 口
-        for points in landmark[48:60]:
-            cv2.drawMarker(
-                img, (points[0], points[1]), (21, 255, 12))
+        for i in range(7):
+            sp_idx = MOUTH_POSITIONS[i][0]
+            ep_idx = MOUTH_POSITIONS[i][1]
+
+            mouth_sp = (landmark[sp_idx][0], landmark[sp_idx][1])
+            mouth_ep = (landmark[ep_idx][0], landmark[ep_idx][1])
+
+            img = cv2.arrowedLine(img, mouth_sp, mouth_ep, MOUTH_COLORS[i], 3)
 
     result, dst_data = cv2.imencode('.png', img)
 
-    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 
