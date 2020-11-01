@@ -44,42 +44,45 @@ def facemark(gray_img):
     return landmarks
 
 
+def synth_image(f_img, b_img):
+    # I want to put logo on top-left corner, So I create a ROI
+    rows, cols, channels = f_img.shape
+    roi = b_img[0:rows, 0:cols]
+
+    # Now create a mask of logo and create its inverse mask also
+    f_img_gray = cv2.cvtColor(f_img, cv2.COLOR_BGR2GRAY)
+    ret, mask = cv2.threshold(f_img_gray, 10, 255, cv2.THRESH_BINARY)
+    mask_inv = cv2.bitwise_not(mask)
+
+    # Now black-out the area of logo in ROI
+    b_img_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
+
+    # Take only region of logo from logo image.
+    f_img_bg = cv2.bitwise_and(f_img, f_img, mask=mask)
+
+    # Put logo in ROI and modify the main image
+    dst = cv2.add(b_img_bg, f_img_bg)
+    b_img[0:rows, 0:cols] = dst
+
+    return b_img
+
+
 def detection(stream):
+    # imageはping!!
+
     img_binary = base64.b64decode(stream)
     img_array = np.frombuffer(img_binary, dtype=np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    img = cv2.imdecode(img_array, cv2.IMREAD_UNCHANGED)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 処理を早くするためグレースケールに変換
     landmarks = facemark(gray)  # ランドマーク検出
 
     # ランドマークの描画
     for landmark in landmarks:
-        # まゆ
-        for points in landmark[18:27]:
-            # cv2.drawMarker(
-            #     img, (points[0], points[1]), (21, 255, 12))
-            img = cv2.line(img, (points[0], points[1]-10),
-                           (points[0], points[1]-10), (21, 255, 12), 5)
-            img = cv2.line(img, (points[0], points[1]+10),
-                           (points[0], points[1]+10), (21, 255, 12), 5)
-
-        # 眉をかく
-        # mayu_sp = (landmark[18][0], landmark[18][1])
-        # mayu_ep = (landmark[26][0], landmark[26][1])
-        # img = cv2.line(img, mayu_sp, mayu_ep, (255, 0, 0), 5)
-
-        # 画像貼り付け
-        # mayu_img = cv2.imread(
-        #     './template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
-
-        # b_channel, g_channel, r_channel = cv2.split(img)
-        # alpha_channel = np.ones(b_channel.shape, dtype=b_channel.dtype) * 50
-        # img = cv2.merge((b_channel, g_channel, r_channel, alpha_channel))
-
-        # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
-
-        # height, width = mayu_img.shape[:2]
-        # img[100:height + 100, 200:width + 200] = mayu_img
+        # まゆ テンプレート画像貼り付け
+        mayu_img = cv2.imread(
+            './template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
+        img = synth_image(mayu_img, img)
 
         # 鼻
         # for points in landmark[28:31]:
