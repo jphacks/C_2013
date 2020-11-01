@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 import io
 import os
 import base64
 
-# from middleware.detect import detection
 from controller.mayu_controller import mayu_handler
 from controller.lip_controller import lip_handler
 from middleware.detect_dots import detect_dots
@@ -12,6 +12,7 @@ from controller.nose_controller import nose_handler
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/")
