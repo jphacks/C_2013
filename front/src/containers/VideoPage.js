@@ -86,7 +86,7 @@ export default function VideoFeed() {
 
   const [isMenuShown, setMenuShown] = useState(false);
   const toggle = () => {
-    setMenuShown(!isMenuShown)
+    setMenuShown(!isMenuShown);
   };
 
   return (

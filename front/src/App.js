@@ -1,5 +1,5 @@
 import VideoFeed from "./containers/VideoPage";
-import TopPage from "./containers/TopPage"
+import TopPage from "./containers/TopPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {

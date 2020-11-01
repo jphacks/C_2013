@@ -1,6 +1,6 @@
 version: "3"
 services:
-  jp-backend:
+  jp-detect-api:
     build: .
     ports:
       - 5000:5000

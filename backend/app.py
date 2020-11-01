@@ -17,8 +17,10 @@ def hello_world():
 
 @app.route("/upload", methods=["POST"])
 def upload():
+    # lip_thickness: thin or thick or normal
+    lip_thickness = request.json['lip']
     img = request.json['file'].encode()
-    dst_data = detection(img)
+    dst_data = detection(img, lip_thickness)
     encoded_string = base64.b64encode(dst_data).decode()
     return jsonify({'image': encoded_string})
 
