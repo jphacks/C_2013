@@ -152,7 +152,7 @@ def detection(stream):
             mouth_sp = (landmark[sp_idx][0], landmark[sp_idx][1])
             mouth_ep = (landmark[ep_idx][0], landmark[ep_idx][1])
 
-            img = cv2.arrowedLine(img, mouth_sp, mouth_ep, MOUTH_COLORS[i], 3)
+            img = cv2.arrowedLine(img, mouth_sp, mouth_ep, MOUTH_COLORS[i], 2)
 
     result, dst_data = cv2.imencode('.png', img)
 
