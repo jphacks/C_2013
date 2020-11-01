@@ -45,22 +45,22 @@ def facemark(gray_img):
 
 
 def synth_image(f_img, b_img):
-    # I want to put logo on top-left corner, So I create a ROI
+    # create a ROI
     rows, cols, channels = f_img.shape
     roi = b_img[0:rows, 0:cols]
 
-    # Now create a mask of logo and create its inverse mask also
+    # create a mask and create its inverse mask
     f_img_gray = cv2.cvtColor(f_img, cv2.COLOR_BGR2GRAY)
     ret, mask = cv2.threshold(f_img_gray, 10, 255, cv2.THRESH_BINARY)
     mask_inv = cv2.bitwise_not(mask)
 
-    # Now black-out the area of logo in ROI
+    # black-out the area of img in ROI
     b_img_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
 
-    # Take only region of logo from logo image.
+    # Take only region of template from image.
     f_img_bg = cv2.bitwise_and(f_img, f_img, mask=mask)
 
-    # Put logo in ROI and modify the main image
+    # Put template in ROI and modify the main image
     dst = cv2.add(b_img_bg, f_img_bg)
     b_img[0:rows, 0:cols] = dst
 
@@ -85,9 +85,6 @@ def detection(stream):
         img = synth_image(mayu_img, img)
 
         # 鼻
-        # for points in landmark[28:31]:
-        #     cv2.drawMarker(
-        #         img, (points[0], points[1]), (21, 255, 12))
         nose_sp = (landmark[28][0], landmark[28][1])
         nose_ep = (landmark[30][0], landmark[30][1])
         img = cv2.line(img, nose_sp, nose_ep, (255, 0, 0), 5)
