@@ -3,8 +3,8 @@ import dlib
 import numpy
 import os
 
-# Cascade files directory path
-predictor = dlib.shape_predictor('learned-models/helen-dataset.dat')
+models=['learned-models/helen-dataset.dat',"learned-models/shape_predictor_68_face_landmarks.dat"]
+predictor = dlib.shape_predictor(models[0])
 face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
 os.makedirs("results", exist_ok=True)
 

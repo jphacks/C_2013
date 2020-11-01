@@ -4,3 +4,4 @@ venv
 zip
 haarcascades
 learned-models
+__pychache__
