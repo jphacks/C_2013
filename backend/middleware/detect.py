@@ -30,14 +30,15 @@ MOUTH_COLORS = [
     (170, 52, 224, 255*88/100)
 ]
 
+# 上唇なら-1, 下唇なら1
 MOUTH_POSITIONS = [
-    (50, 51),
-    (52, 51),
-    (58, 56),
-    (48, 50),
-    (48, 58),
-    (54, 52),
-    (54, 56)
+    (50, 51, -1),
+    (52, 51, -1),
+    (58, 56, 1),
+    (48, 50, -1),
+    (48, 58, 1),
+    (54, 52, -1),
+    (54, 56, 1)
 ]
 
 
@@ -117,7 +118,7 @@ def resize_mayu(temp_img, mayu_len):
     return temp_img
 
 
-def detection(stream):
+def detection(stream, lip_thickness):
     # imageはping!!
     # drawlineの時のcolorは(g,b,r,a) (0<g,b,r,a,<255)
 
@@ -149,14 +150,36 @@ def detection(stream):
             sp_idx = MOUTH_POSITIONS[i][0]
             ep_idx = MOUTH_POSITIONS[i][1]
 
-            mouth_sp = (landmark[sp_idx][0], landmark[sp_idx][1])
-            mouth_ep = (landmark[ep_idx][0], landmark[ep_idx][1])
+            if lip_thickness == 'thin':
+                # 厚く
+                mouth_sp = (
+                    landmark[sp_idx][0],
+                    landmark[sp_idx][1] + 5*MOUTH_POSITIONS[i][2]
+                )
+                mouth_ep = (
+                    landmark[ep_idx][0],
+                    landmark[ep_idx][1] + 5*MOUTH_POSITIONS[i][2]
+                )
+            elif lip_thickness == 'thick':
+                # 薄く
+                mouth_sp = (
+                    landmark[sp_idx][0],
+                    landmark[sp_idx][1] + 5*MOUTH_POSITIONS[i][2]*(-1)
+                )
+                mouth_ep = (
+                    landmark[ep_idx][0],
+                    landmark[ep_idx][1] + 5*MOUTH_POSITIONS[i][2]*(-1)
+                )
+            else:
+                # 普通
+                mouth_sp = (landmark[sp_idx][0], landmark[sp_idx][1])
+                mouth_ep = (landmark[ep_idx][0], landmark[ep_idx][1])
 
             img = cv2.arrowedLine(img, mouth_sp, mouth_ep, MOUTH_COLORS[i], 2)
 
     result, dst_data = cv2.imencode('.png', img)
 
-    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 
