@@ -16,7 +16,7 @@ jobs:
           python-version: "3.8"
 
       - name: Commentout 'cv2.imwrite'
-        run: sed -i '' -e '/cv2.imwrite/s/^/# /g' backend/controller/*.py
+        run: sed -i -e '/cv2.imwrite/s/^/# /g' ./backend/controller/*.py
 
       - name: Run flake8
         uses: julianwachholz/flake8-action@v1.1.0
