@@ -32,8 +32,8 @@ jobs:
         env: 
           S3_DOWNLOAD_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |
-          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/haarcascades/ ./backend/ --recursive --quiet
-          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/learned-models/ ./backend/ --recursive --quiet
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/haarcascades/ ./backend/ --recursive
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/learned-models/ ./backend/ --recursive
 
       - name: Login to Amazon ECR
         id: login-ecr
