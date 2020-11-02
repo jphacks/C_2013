@@ -68,6 +68,7 @@ def mayu_handler(stream):
         # テンプレート画像貼り付け
         mayu_img = cv2.imread(
             './template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
+
         mayu_img = resize_mayu(mayu_img, mayu_len)
         img = synth_mayu_temp(mayu_img, img, landmark[22], False)  # 左眉
         img = synth_mayu_temp(mayu_img, img, landmark[21], True)  # 右眉
