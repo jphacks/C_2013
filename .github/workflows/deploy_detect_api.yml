@@ -34,7 +34,7 @@ jobs:
         run: |
           aws s3 cp s3://$S3_DOWNLOAD_BUCKET/haarcascades/ ./backend/ --recursive
           aws s3 cp s3://$S3_DOWNLOAD_BUCKET/learned-models/ ./backend/ --recursive
-          ls
+          ls backend/
 
       - name: Login to Amazon ECR
         id: login-ecr
