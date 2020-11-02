@@ -2,6 +2,8 @@ name: Pretter
 
 on:
   pull_request:
+    paths:
+      - "front/**"
 
 jobs:
   lint:

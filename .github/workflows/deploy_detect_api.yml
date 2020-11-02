@@ -2,6 +2,8 @@ on:
   push:
     branches:
       - master
+    path:
+      - "backend/**"
 
 name: Deploy detect API to Amazon ECS
 
@@ -20,12 +22,22 @@ jobs:
         run: |
           touch task-definition.json
           echo ${TASK_DEFINITION_JSON} > task-definition.json
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
+
+      - name: Download file from S3
+        env:
+          S3_DOWNLOAD_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          mkdir haarcascades learned-models
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/haarcascades ./backend/haarcascades --recursive
+          aws s3 cp s3://$S3_DOWNLOAD_BUCKET/learned-models ./backend/learned-models --recursive
+          ls ./backend
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -59,3 +71,31 @@ jobs:
           service: detect-api
           cluster: detect-api-cluster
           wait-for-service-stability: true
+
+      - name: Set COMMIT_MESSAGE
+        run: echo ::set-env name=COMMIT_MESSAGE::$(echo "${{ github.event.head_commit.message }}" | tr '\n' ' ')
+      - name: Slack Notification on SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@master
+        env:
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          text: Successfully automated deployment.
+          attachments: |
+            [
+              {
+                "color": "good",
+                "author_name": "${{ github.actor }}",
+                "author_icon": "${{ github.event.sender.avatar_url }}",
+                "fields": [
+                  {
+                    "title": "Commit Message",
+                    "value": "${{ env.COMMIT_MESSAGE }}"
+                  },
+                  {
+                    "title": "Compare URL",
+                    "value": "${{ github.event.compare }}"
+                  }
+                ]
+              }
+            ]

@@ -1,20 +1,12 @@
 import React from "react";
+import "./slidemenu.css";
 import SlideMenuButton from "./slidemenubutton";
 
-const menus = ["EYEBROW", "LIP", "NOSE"];
+const menus = ["EYEBROW", "LIP", "NOSE", "CHEAK"];
 
 const SlideMenu = ({ toggle }) => {
   return (
-    <div
-      style={{
-        backgroundColor: "rgba(0, 0, 0, 0.75)",
-        width: "100%",
-        height: "100%",
-        position: "absolute",
-        top: "0",
-        paddingTop: "200px",
-      }}
-    >
+    <div className="slide">
       {menus.map((menu) => {
         return (
           <p onClick={toggle} style={{ textAlign: "center", margin: "50px" }}>
