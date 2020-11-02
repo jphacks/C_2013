@@ -1,4 +1,4 @@
-name: Pretter
+name: Flake8
 
 on:
   pull_request:
