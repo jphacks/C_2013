@@ -36,7 +36,7 @@ def cheak_handler(stream):
         img = cv2.line(img, right_cheak_sp4, right_cheak_ep4, (255, 255, 255, 255), 3)
 
         
-    result2, dst_data2 = cv2.imencode('.png', img)
+    result, dst_data = cv2.imencode('.png', img)
     cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
