@@ -4,6 +4,7 @@ from flask_cors import CORS
 import io
 import os
 import base64
+import traceback
 
 from controller.mayu_controller import mayu_handler
 from controller.lip_controller import lip_handler
@@ -41,6 +42,7 @@ def base_handler(func, args):
     try:
         dst_data = func(*args)
     except Exception as e:
+        print(traceback.format_exc())
         description = {'message': str(e)}
         return False, description
 
