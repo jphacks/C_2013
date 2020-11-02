@@ -9,6 +9,7 @@ from controller.mayu_controller import mayu_handler
 from controller.lip_controller import lip_handler
 from middleware.detect_dots import detect_dots
 from controller.nose_controller import nose_handler
+from controller.cheak_controller import cheak_handler
 
 
 app = Flask(__name__)
@@ -54,6 +55,12 @@ def detect_dot():
 
     return jsonify({'dots': encoded_string})
 
+@app.route("/cheak", methods=["POST"])
+def cheak():
+    img = request.json['file'].encode()
+    dst_data = cheak_handler(img)
+    encoded_string = base64.b64encode(dst_data).decode()
+    return jsonify({'image': encoded_string})
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
