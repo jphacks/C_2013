@@ -1,7 +1,6 @@
-img
-results
-venv
-zip
-haarcascades
-learned-models
-__pychache__
+img/
+results/
+venv/
+haarcascades/
+learned-models/
+__pycache__/
