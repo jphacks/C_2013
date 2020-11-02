@@ -8,7 +8,7 @@ const StyledDiv = styled.div({
   right: "0",
 });
 
-const navs = ["EYEBROW", "LIP", "NOSE"];
+const navs = ["EYEBROW", "LIP", "NOSE", "CHEAK"];
 
 const Navbar = () => {
   return (

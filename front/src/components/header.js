@@ -9,11 +9,11 @@ function Header({ toggle }) {
     <div style={{ height: "200px" }}>
       <HomeButton />
 
-      <MediaQuery query="(max-width: 870px)">
+      <MediaQuery query="(max-width: 900px)">
         <MenuButton toggle={toggle} />
       </MediaQuery>
 
-      <MediaQuery query="(min-width: 871px)">
+      <MediaQuery query="(min-width: 901px)">
         <Navbar />
       </MediaQuery>
     </div>
