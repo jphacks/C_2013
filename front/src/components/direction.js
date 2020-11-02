@@ -18,7 +18,7 @@ const Direction = () => {
     "/video/EYEBROW": "眉毛ラインなぞってね",
     "/video/LIP": "リップラインを書いてね",
     "/video/NOSE": "ハイライトをひいてね",
-    "/video/CHEAK": "四角の中にチークを入れてね"
+    "/video/CHEAK": "四角の中にチークを入れてね",
   };
   return <StyledDiv>{message[url]}</StyledDiv>;
 };
