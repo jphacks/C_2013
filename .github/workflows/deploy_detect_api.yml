@@ -3,7 +3,7 @@ on:
     branches:
       - master
     path:
-      - ./backend/**
+      - "backend/**"
 
 name: Deploy detect API to Amazon ECS
 
