@@ -31,8 +31,8 @@ const TopPage = () => {
             <Logo />
           </>
         ) : (
-            <Select />
-          )}
+          <Select />
+        )}
       </StyledDiv>
     </>
   );

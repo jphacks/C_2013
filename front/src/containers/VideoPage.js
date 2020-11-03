@@ -56,7 +56,7 @@ export default function VideoFeed() {
       "/video/EYEBROW": "/mayu",
       "/video/LIP": "/lip",
       "/video/NOSE": "/nose",
-      "/video/CHEAK": "/cheak"
+      "/video/CHEAK": "/cheak",
     };
     await fetch(message[endpoint], {
       method: "POST",
@@ -80,7 +80,7 @@ export default function VideoFeed() {
   // ループ処理
   useEffect(() => {
     async function fetchData() {
-      setCount(c => c + 1);
+      setCount((c) => c + 1);
       await detect();
       setTimeout(() => setLoopInvoke((v) => !v), LOOP_WAIT_TIME);
     }
