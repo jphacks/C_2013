@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/logo";
-import { Redirect } from "react-router-dom";
 import Select from "../components/select";
 
 const StyledDiv = styled.div({
@@ -32,8 +31,8 @@ const TopPage = () => {
             <Logo />
           </>
         ) : (
-          <Select />
-        )}
+            <Select />
+          )}
       </StyledDiv>
     </>
   );
