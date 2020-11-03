@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/logo";
-import StartButton from "../components/startbutton";
+import { Redirect } from "react-router-dom";
+import Select from "../components/select";
 
 const StyledDiv = styled.div({
   background: "linear-gradient(rgb(225, 123, 224), rgb(175, 225, 246))",
   textAlign: "center",
-  position: "absolute",
-  top: "0",
-  bottom: "0",
   width: "100%",
+  minHeight: "1000px",
 });
 const StyledP = styled.p({
   fontFamily: "book",
@@ -20,14 +19,23 @@ const StyledP = styled.p({
 });
 
 const TopPage = () => {
+  const [isTitleShown, setTitleShown] = useState(true);
+  setTimeout(() => {
+    setTitleShown(false);
+  }, 10000);
   return (
-    <div>
+    <>
       <StyledDiv>
-        <StyledP>MAKEU</StyledP>
-        <Logo />
-        <StartButton />
+        {isTitleShown ? (
+          <>
+            <StyledP>MAKEU</StyledP>
+            <Logo />
+          </>
+        ) : (
+          <Select />
+        )}
       </StyledDiv>
-    </div>
+    </>
   );
 };
 
