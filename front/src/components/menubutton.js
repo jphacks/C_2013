@@ -6,7 +6,7 @@ const MenuButton = ({ toggle }) => {
     <div
       style={{
         fontSize: "60px",
-        color: "rgba(0, 0, 0, 0.5)",
+        color: "rgba(0, 0, 0, 0.3)",
         position: "absolute",
         right: "50px",
         top: "59px",
