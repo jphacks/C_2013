@@ -4,6 +4,7 @@ import SlideMenu from "../components/slidemenu";
 import Header from "../components/header";
 import Direction from "../components/direction";
 import LipMenu from "../components/lipmenu";
+import NoImage from "../components/noimage";
 
 const LOOP_WAIT_TIME = 250;
 
@@ -13,6 +14,7 @@ export default function VideoFeed() {
   const videoEl = useRef(null);
   const [loopInvoke, setLoopInvoke] = useState(false);
   const [count, setCount] = useState(0);
+  const [hasImage, setHasImage] = useState(false);
 
   const detect = useCallback(async () => {
     const video = videoEl.current;
@@ -69,9 +71,11 @@ export default function VideoFeed() {
       .then((res) => res.json())
       .then((data) => {
         image_data = data.image;
+        setHasImage(true);
       })
       .catch((err) => {
         console.log(err);
+        setHasImage(false)
       });
 
     return image_data;
@@ -112,13 +116,16 @@ export default function VideoFeed() {
       <Direction />
       {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
       <div style={{ textAlign: "center" }}>
+
+
+        <NoImage />
+        {hasImage ? <canvas ref={canvasEl} width="640" height="480" /> : <canvas ref={canvasEl} style={{ visibility: "hidden" }} />}
+      </div>
+      <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} />
       </div>
-      <div style={{ textAlign: "center" }}>
-        <canvas ref={canvasEl} width="640" height="480" />
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <canvas ref={dummycanvasEl} width="0" height="0" />
+      <div style={{ textAlign: "center", visibility: "hidden" }}>
+        <canvas ref={dummycanvasEl} />
       </div>
     </div>
   );
