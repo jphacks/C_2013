@@ -1,6 +1,7 @@
 import VideoFeed from "./containers/VideoPage";
 import TopPage from "./containers/TopPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import ColorPage from "./containers/ColorPage";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
         </Route>
         <Route path="/video">
           <VideoFeed></VideoFeed>
+        </Route>
+        <Route path="/color">
+          <ColorPage />
         </Route>
       </div>
     </Router>
