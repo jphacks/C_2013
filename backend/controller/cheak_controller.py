@@ -2,7 +2,8 @@ import cv2
 
 import time
 
-from middleware.detect import detection
+# from middleware.detect import detection
+from middleware.fast_detect import detection
 
 
 def cheak_handler(stream):
@@ -35,7 +36,6 @@ def cheak_handler(stream):
         img = cv2.line(img, left_cheak_sp4, left_cheak_ep4, (255, 255, 255, 255), 3)
         img = cv2.line(img, right_cheak_sp4, right_cheak_ep4, (255, 255, 255, 255), 3)
 
-        
     result, dst_data = cv2.imencode('.png', img)
     cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 

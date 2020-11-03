@@ -2,7 +2,8 @@ import cv2
 
 import time
 
-from middleware.detect import detection
+# from middleware.detect import detection
+from middleware.fast_detect import detection
 
 
 def calc_mayu_size(landmarks):
