@@ -2,6 +2,7 @@ import VideoFeed from "./containers/VideoPage";
 import TopPage from "./containers/TopPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ColorPage from "./containers/ColorPage";
+import TemplatePage from "./containers/TemplatePage";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/color">
           <ColorPage />
+        </Route>
+        <Route path="/eyebrow_template">
+          <TemplatePage />
         </Route>
       </div>
     </Router>
