@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
 import Header from "../components/header";
@@ -14,7 +14,7 @@ export default function VideoFeed() {
   const [loopInvoke, setLoopInvoke] = useState(false);
   const [count, setCount] = useState(0);
 
-  const detect = async () => {
+  const detect = useCallback(async () => {
     const video = videoEl.current;
 
     const canvasElement = canvasEl.current;
@@ -46,7 +46,7 @@ export default function VideoFeed() {
     img.onload = function () {
       canvas.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
     };
-  };
+  }, []);
 
   const postData = async (input) => {
     const body = { file: input };
@@ -56,6 +56,7 @@ export default function VideoFeed() {
       "/video/EYEBROW": "/mayu",
       "/video/LIP": "/lip",
       "/video/NOSE": "/nose",
+      "/video/CHEAK": "/cheak",
     };
     await fetch(message[endpoint], {
       method: "POST",
@@ -77,11 +78,14 @@ export default function VideoFeed() {
   };
 
   // ループ処理
-  useEffect(async () => {
-    setCount(count + 1);
-    await detect();
-    setTimeout(() => setLoopInvoke((v) => !v), LOOP_WAIT_TIME);
-  }, [loopInvoke]);
+  useEffect(() => {
+    async function fetchData() {
+      setCount((c) => c + 1);
+      await detect();
+      setTimeout(() => setLoopInvoke((v) => !v), LOOP_WAIT_TIME);
+    }
+    fetchData();
+  }, [loopInvoke, detect]);
 
   useEffect(() => {
     if (!videoEl) {
