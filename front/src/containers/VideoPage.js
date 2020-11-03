@@ -59,6 +59,7 @@ export default function VideoFeed() {
       "/video/LIP": "/lip",
       "/video/NOSE": "/nose",
       "/video/CHEAK": "/cheak",
+      "/video/eyebrow_template": "/template/eyebrow"
     };
     await fetch(message[endpoint], {
       method: "POST",
