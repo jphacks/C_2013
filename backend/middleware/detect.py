@@ -12,12 +12,12 @@ cfg = app.config
 
 # OpenCVのカスケードファイルと学習済みモデルのパスを指定
 CASCADE_PATH = cfg["CASCADEPASS"]
-CASCADE = cv2.CascadeClassifier(
-    CASCADE_PATH + cfg["CASCADE"])
+CASCADE = cv2.CascadeClassifier(CASCADE_PATH + cfg["CASCADE"])
 
 LEARNED_MODEL_PATH = cfg["LEARNEDMODELPATH"]
-PREDICTOR = dlib.shape_predictor(
-    LEARNED_MODEL_PATH + cfg["LEARNEDMODEL"])
+MODEL = {}
+MODEL['PREDICTOR'] = dlib.shape_predictor(LEARNED_MODEL_PATH + cfg["DETECTMODEL"])
+MODEL['SURROUNDER'] = dlib.shape_predictor(LEARNED_MODEL_PATH + cfg['SURROUNDMODEL'])
 
 
 def face_position(gray_img):
@@ -26,7 +26,7 @@ def face_position(gray_img):
     return faces
 
 
-def facemark(gray_img):
+def facemark(gray_img, model):
     # ランドマーク検出
     faces_roi = face_position(gray_img)
     landmarks = []
@@ -38,12 +38,12 @@ def facemark(gray_img):
 
         for rect in rects:
             landmarks.append(
-                np.array([[p.x, p.y] for p in PREDICTOR(gray_img, rect).parts()]))
+                np.array([[p.x, p.y] for p in MODEL[model](gray_img, rect).parts()]))
 
     return landmarks
 
 
-def detection(stream):
+def detection(stream, model='PREDICTOR'):
     # imageはping!!
     # drawlineの時のcolorは(g,b,r,a) (0<g,b,r,a,<255)
 
@@ -52,7 +52,7 @@ def detection(stream):
     img = cv2.imdecode(img_array, cv2.IMREAD_UNCHANGED)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 処理を早くするためグレースケールに変換
-    landmarks = facemark(gray)  # ランドマーク検出
+    landmarks = facemark(gray, model)  # ランドマーク検出
 
     return landmarks, img
 
