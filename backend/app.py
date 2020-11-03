@@ -11,6 +11,7 @@ from controller.lip_controller import lip_handler
 from middleware.detect_dots import detect_dots
 from controller.nose_controller import nose_handler
 from controller.cheak_controller import cheak_handler
+from controller.template_controller import make_eyebrow
 
 
 app = Flask(__name__)
@@ -133,6 +134,22 @@ def cheak():
     dst_data = cheak_handler(img)
     encoded_string = base64.b64encode(dst_data).decode()
     return jsonify({'image': encoded_string})
+
+
+@app.route("/template/eyebrow", methods=["POST"])
+def eyebrow_template():
+    error_message = check_param(request.json, {'file': str})
+    if error_message:
+        abort(400, {'message': error_message})
+
+    img = request.json['file'].encode()
+
+    success, res = make_eyebrow(img)
+
+    if success:
+        return jsonify(res)
+    else:
+        abort(400, res)
 
 
 if __name__ == "__main__":
