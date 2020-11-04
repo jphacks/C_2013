@@ -11,11 +11,9 @@ class Template(db.Model):
     def __repr__(self):
         return '<Template %r>' % self.name
 
-    def get_all():
-        # select * from templates
-        template_list = db.session.query(Template).all()
-
-        if template_list == None:
-            return []
-        else:
-            return template_list
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'uri': self.uri
+        }

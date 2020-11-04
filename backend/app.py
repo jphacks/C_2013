@@ -69,8 +69,6 @@ def error_handler(error):
 
 @app.route("/")
 def hello_world():
-    templates = Template.get_all()
-    print(templates)
     return "Hello, World!"
 
 
@@ -155,6 +153,12 @@ def eyebrow_template():
         return jsonify(res)
     else:
         abort(400, res)
+
+
+@app.route('/template')
+def get_templates():
+    res = {"templates": [Template.to_dict(template) for template in Template.query.all()]}
+    return jsonify(res)
 
 
 if __name__ == "__main__":
