@@ -1,0 +1,48 @@
+name: backend CI
+
+on:
+  pull_request:
+    paths:
+      - "backend/**"
+
+jobs:
+  lint:
+    name: Python Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+
+      - name: Commentout 'cv2.imwrite'
+        run: sed -i -e '/cv2.imwrite/s/^/# /g' ./backend/controller/*.py
+
+      - name: Run flake8
+        uses: julianwachholz/flake8-action@v1.1.0
+        with:
+          checkName: "Python Lint"
+          path: backend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt -y upgrade
+          sudo apt install ffmpeg
+          python -m pip install --upgrade pip
+          pip install -r requirement.txt
+
+      - name: Set Test Image
+        env:
+          IMG_TEXT: ${{ secrets.IMG_TEXT }}
+        run: |
+          mkdir img
+          touch img/img.txt
+          echo ${IMG_TEXT} > img/img.txt
+        working-directory: ./backend/tests
+
+      - name: Test
+        run: python -m unittest discover tests/
+        working-directory: ./backend
