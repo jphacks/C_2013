@@ -6,3 +6,5 @@ haarcascades
 img
 learned-models
 result
+
+.env
