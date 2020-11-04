@@ -14,6 +14,7 @@ from controller.nose_controller import nose_handler
 from controller.cheak_controller import cheak_handler
 from controller.template_controller import make_eyebrow
 from db import database
+from model.template_model import Template
 
 
 app = Flask(__name__)
@@ -68,6 +69,8 @@ def error_handler(error):
 
 @app.route("/")
 def hello_world():
+    templates = Template.get_all()
+    print(templates)
     return "Hello, World!"
 
 
