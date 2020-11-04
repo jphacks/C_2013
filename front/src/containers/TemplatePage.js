@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TemplatePage = () => {
-  window.onload = () => {
+  const [isLoaded, setLoaded] = useState(false);
+  //window.onload = () => {
+  useEffect(() => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
 
@@ -40,16 +42,19 @@ const TemplatePage = () => {
       // 演出的な目的で一度映像を止めてSEを再生する
       video.pause(); // 映像を停止
       setImageSubmitted(true);
-      setTimeout(() => {
-        video.play(); // 0.5秒後にカメラ再開
-      }, 500);
+      // setTimeout(() => {
+      video.play(); // 0.5秒後にカメラ再開
+      //}, 500);
 
       // canvasに画像を貼り付ける
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     });
-  };
+  }, [isLoaded]);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
+  const restart = () => {
+    setImageSubmitted(false);
+  }
 
   return (
     <>
@@ -57,15 +62,18 @@ const TemplatePage = () => {
         id="camera"
         width="640"
         height="480"
-        style={{ width: isImageSubmitted ? "0" : "640" }}
+        style={{ position: "absolute", visibility: isImageSubmitted ? "hidden" : "visible" }}
       ></video>
       <canvas
         id="picture"
         width="640"
         height="480"
-        style={{ width: isImageSubmitted ? "640px" : "0" }}
+        style={{ visibility: isImageSubmitted ? "visible" : "hidden" }}
       ></canvas>
       <form>
+        <button type="button" onClick={restart}>
+          撮り直す
+        </button>
         <button type="button" id="shutter">
           シャッター
         </button>
