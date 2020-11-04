@@ -2,6 +2,7 @@ import unittest
 import sys
 import io
 import os
+import base64
 
 # sys.path.append(os.path.abspath("../.."))
 
@@ -14,8 +15,8 @@ class TestAPI(unittest.TestCase):
         app.app.config['TESTING'] = True
         self.client = app.app.test_client()
 
-        with open('tests/img/img.txt') as f:
-            base64_img = f.read()
+        with open('tests/test_img/test.png', 'rb') as f:
+            base64_img = base64.b64encode(f.read()).decode('utf-8')
 
         self.test_data = [
             ('mayu', {'file': base64_img}, 200),
