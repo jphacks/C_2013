@@ -1,4 +1,4 @@
-from ..middleware.fast_detect import detection
+from middleware.fast_detect import detection
 
 
 def make_eyebrow(img):
