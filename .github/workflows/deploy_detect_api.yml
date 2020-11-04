@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - release
+      - master
 
 name: Deploy detect API to Amazon ECS
 
@@ -89,10 +89,6 @@ jobs:
                   {
                     "title": "Commit Message",
                     "value": "${{ env.COMMIT_MESSAGE }}"
-                  },
-                  {
-                    "title": "Compare URL",
-                    "value": "${{ github.event.compare }}"
                   }
                 ]
               }
