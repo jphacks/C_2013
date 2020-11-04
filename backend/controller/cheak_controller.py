@@ -7,7 +7,7 @@ from middleware.fast_detect import detection
 
 
 def cheak_handler(stream):
-    landmarks, img = detection(stream)
+    landmarks, img = detection(stream, )
 
     for landmark in landmarks:
         left_cheak_sp = (landmark[40][0]-5, landmark[29][1]+10)

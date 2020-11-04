@@ -1,9 +1,7 @@
 on:
   push:
     branches:
-      - master
-    path:
-      - "backend/**"
+      - release
 
 name: Deploy detect API to Amazon ECS
 
@@ -30,7 +28,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
 
-      - name: Download file from S3
+      - name: Download model file from S3
         env:
           S3_DOWNLOAD_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |

@@ -59,6 +59,7 @@ export default function VideoFeed() {
       "/video/LIP": "/lip",
       "/video/NOSE": "/nose",
       "/video/CHEAK": "/cheak",
+      "/video/eyebrow_template": "/template/eyebrow",
     };
     await fetch(message[endpoint], {
       method: "POST",
@@ -75,7 +76,7 @@ export default function VideoFeed() {
       })
       .catch((err) => {
         console.log(err);
-        setHasImage(false)
+        setHasImage(false);
       });
 
     return image_data;
@@ -116,10 +117,12 @@ export default function VideoFeed() {
       <Direction />
       {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
       <div style={{ textAlign: "center" }}>
-
-
         <NoImage />
-        {hasImage ? <canvas ref={canvasEl} width="640" height="480" /> : <canvas ref={canvasEl} style={{ visibility: "hidden" }} />}
+        {hasImage ? (
+          <canvas ref={canvasEl} width="640" height="480" />
+        ) : (
+          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+        )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} />
