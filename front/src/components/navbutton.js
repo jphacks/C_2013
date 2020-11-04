@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavButton = ({ value }) => {
+const NavButton = ({ nav }) => {
   return (
     <NavLink
-      to={"/video/" + value}
+      to={nav.path}
       style={{
         fontFamily: "book",
         textDecoration: "none",
@@ -14,7 +14,7 @@ const NavButton = ({ value }) => {
       }}
       activeStyle={{ color: "rgb(235,0, 255)", textDecoration: "underline" }}
     >
-      {value}
+      {nav.value}
     </NavLink>
   );
 };

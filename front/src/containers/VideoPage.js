@@ -108,9 +108,11 @@ export default function VideoFeed() {
     setMenuShown(!isMenuShown);
   };
 
+  const navs = [{ value: "EYEBROW", path: "/video/EYEBROW" }, { value: "LIP", path: "/video/LIP" }, { value: "NOSE", path: "/video/NOSE" }, { value: "CHEAK", path: "/video/CHEAK" }];
+
   return (
     <div>
-      <Header isMenuShown={isMenuShown} toggle={toggle} />
+      <Header isMenuShown={isMenuShown} toggle={toggle} navs={navs} />
       <MediaQuery query="(max-width: 870px)">
         {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
       </MediaQuery>
@@ -121,8 +123,8 @@ export default function VideoFeed() {
         {hasImage ? (
           <canvas ref={canvasEl} width="640" height="480" />
         ) : (
-          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
-        )}
+            <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+          )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} />
