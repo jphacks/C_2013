@@ -108,7 +108,12 @@ export default function VideoFeed() {
     setMenuShown(!isMenuShown);
   };
 
-  const navs = [{ value: "EYEBROW", path: "/video/EYEBROW" }, { value: "LIP", path: "/video/LIP" }, { value: "NOSE", path: "/video/NOSE" }, { value: "CHEAK", path: "/video/CHEAK" }];
+  const navs = [
+    { value: "EYEBROW", path: "/video/EYEBROW" },
+    { value: "LIP", path: "/video/LIP" },
+    { value: "NOSE", path: "/video/NOSE" },
+    { value: "CHEAK", path: "/video/CHEAK" },
+  ];
 
   return (
     <div>
@@ -123,8 +128,8 @@ export default function VideoFeed() {
         {hasImage ? (
           <canvas ref={canvasEl} width="640" height="480" />
         ) : (
-            <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
-          )}
+          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+        )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} />

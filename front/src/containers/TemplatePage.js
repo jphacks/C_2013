@@ -15,9 +15,9 @@ const Button = styled.div({
   display: "inline-block",
   ":hover": {
     backgroundColor: "rgba(235, 49, 188, 0.4)",
-    transition: "all 0.1s"
-  }
-})
+    transition: "all 0.1s",
+  },
+});
 const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 
 const TemplatePage = () => {
@@ -65,13 +65,13 @@ const TemplatePage = () => {
     });
 
     document.querySelector("#ok").addEventListener("click", () => {
-      var can = document.getElementById('picture');
+      var can = document.getElementById("picture");
       var URL = can.toDataURL("image/png", 0.5);
-      var dataURL = URL.substr(22)
+      var dataURL = URL.substr(22);
       const body = { file: dataURL };
 
-      const api = { "/template/EYEBROW": "/template/eyebrow" }
-      const endpoint = window.location.pathname
+      const api = { "/template/EYEBROW": "/template/eyebrow" };
+      const endpoint = window.location.pathname;
 
       fetch(api[endpoint], {
         method: "POST",
@@ -79,20 +79,17 @@ const TemplatePage = () => {
         body: JSON.stringify(body),
       })
         .then((res) => res.json())
-        .then((data) => {
-        })
+        .then((data) => {})
         .catch((err) => {
           console.log(err);
         });
-    })
-
+    });
   }, [isLoaded]);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
   const restart = () => {
     setImageSubmitted(false);
-  }
-
+  };
 
   return (
     <div style={{ height: window.innerHeight, textAlign: "center" }}>
@@ -101,9 +98,23 @@ const TemplatePage = () => {
         id="camera"
         width="640"
         height="480"
-        style={{ position: "absolute", left: "0", right: "0", margin: "auto", visibility: isImageSubmitted ? "hidden" : "visible", borderRadius: "20px" }}
+        style={{
+          position: "absolute",
+          left: "0",
+          right: "0",
+          margin: "auto",
+          visibility: isImageSubmitted ? "hidden" : "visible",
+          borderRadius: "20px",
+        }}
       ></video>
-      <div style={{ visibility: isImageSubmitted ? "visible" : "hidden", margin: "0 auto", width: "640px", borderRadius: "20px" }}>
+      <div
+        style={{
+          visibility: isImageSubmitted ? "visible" : "hidden",
+          margin: "0 auto",
+          width: "640px",
+          borderRadius: "20px",
+        }}
+      >
         <canvas
           id="picture"
           width="640"
@@ -112,15 +123,36 @@ const TemplatePage = () => {
         ></canvas>
       </div>
       <form>
-        <Button id="shutter" style={{ visibility: isImageSubmitted ? "hidden" : "visible", position: "absolute", left: "0", right: "0", margin: "10px auto" }}>
+        <Button
+          id="shutter"
+          style={{
+            visibility: isImageSubmitted ? "hidden" : "visible",
+            position: "absolute",
+            left: "0",
+            right: "0",
+            margin: "10px auto",
+          }}
+        >
           シャッター
         </Button>
-        <Button onClick={restart} style={{ visibility: isImageSubmitted ? "visible" : "hidden", margin: "10px" }}>
+        <Button
+          onClick={restart}
+          style={{
+            visibility: isImageSubmitted ? "visible" : "hidden",
+            margin: "10px",
+          }}
+        >
           撮り直す
         </Button>
-        <Button id="ok" style={{ visibility: isImageSubmitted ? "visible" : "hidden", margin: "10px" }}>
+        <Button
+          id="ok"
+          style={{
+            visibility: isImageSubmitted ? "visible" : "hidden",
+            margin: "10px",
+          }}
+        >
           確定
-          </Button>
+        </Button>
       </form>
     </div>
   );
