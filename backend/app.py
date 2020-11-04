@@ -144,12 +144,15 @@ def eyebrow_template():
 
     img = request.json['file'].encode()
 
-    success, res = make_eyebrow(img)
+    dst_data = make_eyebrow(img)
+    encoded_string = base64.b64encode(dst_data).decode()
+    #success, res = make_eyebrow(img)
 
-    if success:
-        return jsonify(res)
-    else:
-        abort(400, res)
+    #if success:
+     #   return jsonify(res)
+    #else:
+     #   abort(400, res)
+    return jsonify({'image': encoded_string})
 
 
 if __name__ == "__main__":
