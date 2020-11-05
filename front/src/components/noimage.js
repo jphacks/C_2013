@@ -18,6 +18,7 @@ const NoImage = () => {
         fontFamily: "book",
         zIndex: "-100",
         position: "absolute",
+        borderRadius: "20px"
       }}
     >
       NO IMAGE
