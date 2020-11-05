@@ -11,4 +11,4 @@ CREATE TABLE template
     INSERT INTO template
         (uri, name)
     VALUES
-        ('sample_00', 'hogehoge');
+        ('hogehoge', 'sample_00');
