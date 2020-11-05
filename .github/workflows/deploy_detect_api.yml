@@ -19,12 +19,15 @@ jobs:
           TASK_DEFINITION_JSON: ${{ secrets.TASK_DEFINITION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_CONFIG_JSON: ${{ secrets.AWS_CONFIG_JSON }}
         run: |
           touch task-definition.json
           echo ${TASK_DEFINITION_JSON} > task-definition.json
-          touch .env
-          echo ${AWS_ACCESS_KEY_ID} >> .env
-          echo ${AWS_SECRET_ACCESS_KEY} >> .env
+          touch backend/.env
+          echo ${AWS_ACCESS_KEY_ID} >> backend/.env
+          echo ${AWS_SECRET_ACCESS_KEY} >> backend/.env
+          touch backend/config/aws.json
+          echo ${AWS_CONFIG_JSON} > backend/config/aws.json
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
