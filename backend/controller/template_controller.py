@@ -3,6 +3,8 @@ import numpy as np
 import boto3
 
 from middleware.fast_detect import detection
+from db import database
+from model.template_model import Template
 
 import time
 import io
@@ -42,14 +44,22 @@ def make_eyebrow(img, cfg):
         s3_bucket = cfg['S3_BUCKET']
         s3_dir = cfg['S3_DIR']
         s3 = boto3.client('s3', region_name='ap-northeast-1')
+        img_name = '{}/{}.png'.format(s3_dir, str(time.time()))
         response = s3.put_object(
             Body=dst_data.tostring(),
             Bucket=s3_bucket,
-            Key='{}/{}.png'.format(s3_dir, str(time.time()))
+            Key=img_name
         )
+        print(response)
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:
             is_success = False
             res = {'message': 'faild uploading to s3'}
+        else:
+            name = img_name
+            uri = 'uri'
+            template = Template(name=name, uri=uri)
+            database.db.session.add(template)
+            database.db.session.commit()
 
         cv2.imwrite("./result/{}.png".format(str(time.time())), left_eyebrow)
 

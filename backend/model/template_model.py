@@ -7,6 +7,7 @@ class Template(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(64), unique=True, nullable=False)
     uri = db.Column(db.String(256), unique=True, nullable=False)
+    createat = db.Column(db.DateTime, server_default=db.func.now())
 
     def __repr__(self):
         return '<Template %r>' % self.name
@@ -15,5 +16,6 @@ class Template(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'uri': self.uri
+            'uri': self.uri,
+            'createat': self.createat
         }

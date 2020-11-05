@@ -5,10 +5,11 @@ CREATE TABLE template
     uri VARCHAR
     (256),
     name VARCHAR
-    (64)
+    (64),
+    createat DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
     INSERT INTO template
         (uri, name)
     VALUES
-        ('hogehoge', 'sample_00');
+        ('uri', 'sample_00');
