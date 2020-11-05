@@ -23,8 +23,12 @@ def surround_eyebrow(img):
 
 
 def make_eyebrow(img, cfg):
+    is_success = True
+    res = {'message': 'success'}
+
     left_pts = surround_eyebrow(img)
     landmarks, img = detection(img)
+
     for landmark in landmarks:
         cv2.rectangle(img, (landmark[22][0]-5, landmark[22][1]-30), (landmark[26][0]+5, landmark[22][1]+30), (0, 0, 0, 0), cv2.FILLED)
         #left_eyebrow = cv2.polylines(img, [left_pts], True, (200, 0, 0, 200))
@@ -43,10 +47,13 @@ def make_eyebrow(img, cfg):
             Bucket=s3_bucket,
             Key='{}/{}.png'.format(s3_dir, str(time.time()))
         )
-        print(response)
+        if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+            is_success = False
+            res = {'message': 'faild uploading to s3'}
 
         cv2.imwrite("./result/{}.png".format(str(time.time())), left_eyebrow)
-    return True, {'message': 'hogehoge'}
+
+    return is_success, res
 
 
 if __name__ == "__main__":
