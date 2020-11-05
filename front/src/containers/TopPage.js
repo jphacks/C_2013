@@ -8,7 +8,7 @@ const StyledDiv = styled.div({
   textAlign: "center",
   width: "100%",
   minHeight: window.innerHeight,
-  paddingBottom: "100px"
+  paddingBottom: "100px",
 });
 
 const TopPage = () => {
@@ -18,10 +18,13 @@ const TopPage = () => {
   }, 10000);
   return (
     <>
-      <StyledDiv onClick={() => { setTitleShown(false) }}>
+      <StyledDiv
+        onClick={() => {
+          setTitleShown(false);
+        }}
+      >
         <Logo show={isTitleShown} />
-        {isTitleShown ? <></>
-          : <Select />}
+        {isTitleShown ? <></> : <Select />}
       </StyledDiv>
     </>
   );

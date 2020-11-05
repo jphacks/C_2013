@@ -20,7 +20,15 @@ const Logo = ({ show }) => {
       mountOnEnter
       unmountOnExit
     >
-      <div style={{ position: "absolute", left: "0", right: "0", margin: "auto", paddingTop: "50px" }}>
+      <div
+        style={{
+          position: "absolute",
+          left: "0",
+          right: "0",
+          margin: "auto",
+          paddingTop: "50px",
+        }}
+      >
         <StyledP>MAKEU</StyledP>
         <div className="rhombus" />
         <div className="circle" />

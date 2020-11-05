@@ -11,7 +11,7 @@ const StyledDiv = styled.div({
   width: "100%",
   textAlign: "center",
   height: "50px",
-  lineHeight: "50px"
+  lineHeight: "50px",
 });
 
 const Direction = () => {

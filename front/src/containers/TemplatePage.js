@@ -4,8 +4,11 @@ import Header from "../components/header";
 import NoImage from "../components/noimage";
 import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
-import { CameraOutlined, FrownOutlined, SmileOutlined } from "@ant-design/icons";
-
+import {
+  CameraOutlined,
+  FrownOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 
 const Button = styled.div({
   backgroundColor: "rgba(235, 49, 188, 0.6)",
@@ -86,7 +89,7 @@ const TemplatePage = () => {
         body: JSON.stringify(body),
       })
         .then((res) => res.json())
-        .then((data) => { })
+        .then((data) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -148,7 +151,11 @@ const TemplatePage = () => {
             margin: "10px auto",
           }}
         >
-          <label style={{ position: "absolute", left: "30px", fontSize: "25px" }}><CameraOutlined /></label>
+          <label
+            style={{ position: "absolute", left: "30px", fontSize: "25px" }}
+          >
+            <CameraOutlined />
+          </label>
           シャッター
         </Button>
         <Button
@@ -156,10 +163,14 @@ const TemplatePage = () => {
           style={{
             visibility: isImageSubmitted ? "visible" : "hidden",
             margin: "10px",
-            position: "relative"
+            position: "relative",
           }}
         >
-          <label style={{ fontSize: "25px", position: "absolute", left: "30px" }}><FrownOutlined /></label>
+          <label
+            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+          >
+            <FrownOutlined />
+          </label>
           撮り直す
         </Button>
         <Button
@@ -167,10 +178,14 @@ const TemplatePage = () => {
           style={{
             visibility: isImageSubmitted ? "visible" : "hidden",
             margin: "10px",
-            position: "relative"
+            position: "relative",
           }}
         >
-          <label style={{ fontSize: "25px", position: "absolute", left: "30px" }}><SmileOutlined /></label>
+          <label
+            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+          >
+            <SmileOutlined />
+          </label>
           確定
         </Button>
       </form>

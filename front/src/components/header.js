@@ -11,7 +11,7 @@ function Header({ toggle, navs }) {
         height: "70px",
         backgroundColor: "rgba(255, 255, 255, 0.3)",
         boxShadow: "0 0 5px 5px rgba(0, 0, 0, 0.2)",
-        marginBottom: "70px"
+        marginBottom: "70px",
       }}
     >
       <HomeButton />
