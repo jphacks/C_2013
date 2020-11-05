@@ -6,5 +6,6 @@ haarcascades
 img
 learned-models
 result
+config/aws.json
 
 .env
