@@ -1,5 +1,20 @@
 version: "3"
 services:
+  mysql:
+    image: mysql:5.7
+    container_name: jp-db
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${ROOTPASS}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/db_init:/docker-entrypoint-initdb.d
+    networks:
+      - default
+
   jp-detect-api:
     build: .
     container_name: jp-detect-api

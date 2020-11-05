@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 import io
 import os
@@ -12,6 +13,8 @@ from middleware.detect_dots import detect_dots
 from controller.nose_controller import nose_handler
 from controller.cheak_controller import cheak_handler
 from controller.template_controller import make_eyebrow
+from db import database
+from model.template_model import Template
 
 
 app = Flask(__name__)
@@ -155,6 +158,31 @@ def eyebrow_template():
     return jsonify({'image': encoded_string})
 
 
+@app.route('/template', methods=["GET", "POST"])
+def get_templates():
+    if request.method == 'GET':
+        res = {"templates": [Template.to_dict(template) for template in Template.query.all()]}
+        return jsonify(res)
+    elif request.method == 'POST':
+        name = request.json['name']
+        uri = 'hogehoge'
+        template = Template(name=name, uri=uri)
+        database.db.session.add(template)
+        database.db.session.commit()
+        res = {'response': 'ok', 'template': Template.to_dict(template)}
+        return jsonify(res)
+
+
 if __name__ == "__main__":
+    load_dotenv()
+    db_config = {
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASS'),
+        'host': 'mysql',
+        'db_name': os.getenv('DB_NAME')
+    }
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**db_config)
+    database.init_db(app)
+
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
