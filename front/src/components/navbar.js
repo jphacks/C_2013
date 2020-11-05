@@ -8,13 +8,11 @@ const StyledDiv = styled.div({
   right: "0",
 });
 
-const navs = ["EYEBROW", "LIP", "NOSE", "CHEAK"];
-
-const Navbar = () => {
+const Navbar = ({ navs }) => {
   return (
     <StyledDiv>
       {navs.map((nav) => {
-        return <NavButton value={nav} />;
+        return <NavButton nav={nav} />;
       })}
     </StyledDiv>
   );

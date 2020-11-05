@@ -108,9 +108,16 @@ export default function VideoFeed() {
     setMenuShown(!isMenuShown);
   };
 
+  const navs = [
+    { value: "EYEBROW", path: "/video/EYEBROW" },
+    { value: "LIP", path: "/video/LIP" },
+    { value: "NOSE", path: "/video/NOSE" },
+    { value: "CHEAK", path: "/video/CHEAK" },
+  ];
+
   return (
     <div>
-      <Header isMenuShown={isMenuShown} toggle={toggle} />
+      <Header isMenuShown={isMenuShown} toggle={toggle} navs={navs} />
       <MediaQuery query="(max-width: 870px)">
         {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
       </MediaQuery>

@@ -17,7 +17,7 @@ function App() {
         <Route path="/color">
           <ColorPage />
         </Route>
-        <Route path="/eyebrow_template">
+        <Route path="/template">
           <TemplatePage />
         </Route>
       </div>
