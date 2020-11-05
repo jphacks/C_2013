@@ -4,8 +4,8 @@ import SelectBox from "./selectbox";
 const Select = () => {
   return (
     <>
-      <SelectBox name="セルフモード" path="/template" />
-      <SelectBox name="メイクモード" path="/video" />
+      <SelectBox name="セルフモード" path="/template/EYEBROW" />
+      <SelectBox name="メイクモード" path="/video/EYEBROW" />
       <SelectBox name="カラー診断" path="/color" />
     </>
   );
