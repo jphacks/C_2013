@@ -152,24 +152,15 @@ def eyebrow_template():
     success, res = make_eyebrow(img, app.config)
 
     if success:
-       return jsonify(res)
+        return jsonify(res)
     else:
-       abort(400, res)
+        abort(400, res)
 
 
-@app.route('/template', methods=["GET", "POST"])
+@app.route('/template')
 def get_templates():
-    if request.method == 'GET':
-        res = {"templates": [Template.to_dict(template) for template in Template.query.all()]}
-        return jsonify(res)
-    elif request.method == 'POST':
-        name = request.json['name']
-        uri = 'hogehoge'
-        template = Template(name=name, uri=uri)
-        database.db.session.add(template)
-        database.db.session.commit()
-        res = {'response': 'ok', 'template': Template.to_dict(template)}
-        return jsonify(res)
+    res = {"templates": [Template.to_dict(template) for template in Template.query.all()]}
+    return jsonify(res)
 
 
 if __name__ == "__main__":
