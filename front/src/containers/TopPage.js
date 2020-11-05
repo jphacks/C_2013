@@ -7,14 +7,8 @@ const StyledDiv = styled.div({
   background: "linear-gradient(rgb(225, 123, 224), rgb(175, 225, 246))",
   textAlign: "center",
   width: "100%",
-  minHeight: "1000px",
-});
-const StyledP = styled.p({
-  fontFamily: "book",
-  fontSize: "60px",
-  color: "white",
-  letterSpacing: "20px",
-  paddingTop: "10%",
+  minHeight: window.innerHeight,
+  paddingBottom: "100px",
 });
 
 const TopPage = () => {
@@ -24,15 +18,13 @@ const TopPage = () => {
   }, 10000);
   return (
     <>
-      <StyledDiv>
-        {isTitleShown ? (
-          <>
-            <StyledP>MAKEU</StyledP>
-            <Logo />
-          </>
-        ) : (
-          <Select />
-        )}
+      <StyledDiv
+        onClick={() => {
+          setTitleShown(false);
+        }}
+      >
+        <Logo show={isTitleShown} />
+        {isTitleShown ? <></> : <Select />}
       </StyledDiv>
     </>
   );

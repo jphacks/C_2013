@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/header";
+import NoImage from "../components/noimage";
+import MediaQuery from "react-responsive";
+import SlideMenu from "../components/slidemenu";
+import {
+  CameraOutlined,
+  FrownOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 
 const Button = styled.div({
-  backgroundColor: "rgba(235, 49, 188, 0.7)",
-  fontSize: "20px",
+  backgroundColor: "rgba(235, 49, 188, 0.6)",
+  fontSize: "15px",
   color: "white",
-  width: "150px",
+  width: "400px",
   margin: "10px auto",
   textAlign: "center",
-  padding: "10px",
-  borderRadius: "15px",
+  borderRadius: "30px",
   transition: "all 0.1s",
   display: "inline-block",
+  fontFamily: "arial black",
+  height: "55px",
+  lineHeight: "55px",
+  letterSpacing: "2px",
   ":hover": {
-    backgroundColor: "rgba(235, 49, 188, 0.4)",
+    backgroundColor: "rgba(235, 49, 188, 0.35)",
+    width: "389px",
     transition: "all 0.1s",
   },
 });
 const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 
 const TemplatePage = () => {
-  const [isLoaded, setLoaded] = useState(false);
-
   useEffect(() => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
@@ -84,16 +94,24 @@ const TemplatePage = () => {
           console.log(err);
         });
     });
-  }, [isLoaded]);
+  }, []);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
   const restart = () => {
     setImageSubmitted(false);
   };
+  const [isMenuShown, setMenuShown] = useState(false);
+  const toggle = () => {
+    setMenuShown(!isMenuShown);
+  };
 
   return (
     <div style={{ height: window.innerHeight, textAlign: "center" }}>
-      <Header navs={navs} />
+      <Header navs={navs} toggle={toggle} />
+      <MediaQuery query="(max-width: 870px)">
+        {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
+      </MediaQuery>
+      <NoImage />
       <video
         id="camera"
         width="640"
@@ -133,6 +151,11 @@ const TemplatePage = () => {
             margin: "10px auto",
           }}
         >
+          <label
+            style={{ position: "absolute", left: "30px", fontSize: "25px" }}
+          >
+            <CameraOutlined />
+          </label>
           シャッター
         </Button>
         <Button
@@ -140,8 +163,14 @@ const TemplatePage = () => {
           style={{
             visibility: isImageSubmitted ? "visible" : "hidden",
             margin: "10px",
+            position: "relative",
           }}
         >
+          <label
+            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+          >
+            <FrownOutlined />
+          </label>
           撮り直す
         </Button>
         <Button
@@ -149,8 +178,14 @@ const TemplatePage = () => {
           style={{
             visibility: isImageSubmitted ? "visible" : "hidden",
             margin: "10px",
+            position: "relative",
           }}
         >
+          <label
+            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+          >
+            <SmileOutlined />
+          </label>
           確定
         </Button>
       </form>

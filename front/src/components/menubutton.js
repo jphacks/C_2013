@@ -5,11 +5,11 @@ const MenuButton = ({ toggle }) => {
   return (
     <div
       style={{
-        fontSize: "60px",
-        color: "rgba(0, 0, 0, 0.3)",
+        fontSize: "35px",
+        color: "rgba(235,0, 255, 0.7)",
         position: "absolute",
         right: "50px",
-        top: "59px",
+        top: "8px",
         zIndex: "100",
       }}
     >

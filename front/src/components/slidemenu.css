@@ -9,7 +9,7 @@
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
     z-index: 50;
-    background: linear-gradient(rgb(253, 140, 215), rgb(93, 163, 255));
+    background: linear-gradient(rgb(225, 123, 224), rgb(175, 225, 246));
 }
 
 @keyframes slidein {

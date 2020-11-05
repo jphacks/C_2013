@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div({
   position: "absolute",
-  marginTop: "50px",
   right: "0",
 });
 
