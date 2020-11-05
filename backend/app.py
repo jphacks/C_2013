@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from dotenv import load_dotenv
+import cv2
 
 import io
 import os
@@ -18,6 +19,7 @@ from model.template_model import Template
 
 
 app = Flask(__name__)
+app.config.from_json('./config/aws.json')
 CORS(app)
 
 
@@ -147,15 +149,12 @@ def eyebrow_template():
 
     img = request.json['file'].encode()
 
-    dst_data = make_eyebrow(img)
-    encoded_string = base64.b64encode(dst_data).decode()
-    #success, res = make_eyebrow(img)
+    success, res = make_eyebrow(img, app.config)
 
-    #if success:
-     #   return jsonify(res)
-    #else:
-     #   abort(400, res)
-    return jsonify({'image': encoded_string})
+    if success:
+       return jsonify(res)
+    else:
+       abort(400, res)
 
 
 @app.route('/template', methods=["GET", "POST"])

@@ -25,39 +25,39 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get -y upgrade
-          apt-get install -y cmake
-          apt-get install -y libgl1-mesa-dev
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+#       - name: Install Dependencies
+#         run: |
+#           sudo apt-get update
+#           sudo apt-get -y upgrade
+#           apt-get install -y cmake
+#           apt-get install -y libgl1-mesa-dev
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
 
-      - name: Test
-        run: python -m unittest discover tests/
-        working-directory: ./backend
+#       - name: Test
+#         run: python -m unittest discover tests/
+#         working-directory: ./backend
 
-      - name: Set COMMIT_MESSAGE
-        run: echo ::set-env name=COMMIT_MESSAGE::$(echo "${{ github.event.head_commit.message }}" | tr '\n' ' ')
-      - name: Slack Notification on SUCCESS
-        if: success()
-        uses: tokorom/action-slack-incoming-webhook@master
-        env:
-          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          text: Successfully automated deployment.
-          attachments: |
-            [
-              {
-                "color": "good",
-                "author_name": "${{ github.actor }}",
-                "author_icon": "${{ github.event.sender.avatar_url }}",
-                "fields": [
-                  {
-                    "title": "Commit Message",
-                    "value": "${{ env.COMMIT_MESSAGE }}"
-                  }
-                ]
-              }
-            ]
+#       - name: Set COMMIT_MESSAGE
+#         run: echo ::set-env name=COMMIT_MESSAGE::$(echo "${{ github.event.head_commit.message }}" | tr '\n' ' ')
+#       - name: Slack Notification on SUCCESS
+#         if: success()
+#         uses: tokorom/action-slack-incoming-webhook@master
+#         env:
+#           INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#         with:
+#           text: Successfully automated deployment.
+#           attachments: |
+#             [
+#               {
+#                 "color": "good",
+#                 "author_name": "${{ github.actor }}",
+#                 "author_icon": "${{ github.event.sender.avatar_url }}",
+#                 "fields": [
+#                   {
+#                     "title": "Commit Message",
+#                     "value": "${{ env.COMMIT_MESSAGE }}"
+#                   }
+#                 ]
+#               }
+#             ]
