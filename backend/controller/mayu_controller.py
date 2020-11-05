@@ -1,6 +1,8 @@
 import cv2
+import numpy as np
 
 import time
+import urllib
 
 # from middleware.detect import detection
 from middleware.fast_detect import detection
@@ -68,7 +70,9 @@ def mayu_handler(stream):
 
         # テンプレート画像貼り付け
         mayu_img = cv2.imread('./template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
-
+        # resp = urllib.request.urlopen('https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png')
+        # mayu_img = np.asarray(bytearray(resp.read()), dtype='uint8')
+        # mayu_img = cv2.imdecode(mayu_img, cv2.IMREAD_UNCHANGED)
         mayu_img = resize_mayu(mayu_img, mayu_len)
         img = synth_mayu_temp(mayu_img, img, landmark[22], False)  # 左眉
         img = synth_mayu_temp(mayu_img, img, landmark[21], True)  # 右眉
