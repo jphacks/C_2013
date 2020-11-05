@@ -11,9 +11,9 @@ import io
 def surround_eyebrow(img):
     landmarks, img = detection(img, 'SURROUNDER')
     for landmark in landmarks:
-        #left_pts1 = landmark[84:90]
-        #left_pts2 = landmark[91:101]
-        #left_pts3 = landmark[102:106]
+        #right_pts1 = landmark[84:90]
+        #right_pts2 = landmark[91:101]
+        #right_pts3 = landmark[102:106]
         left_pts1 = landmark[62:68]
         left_pts2 = landmark[69:79]
         left_pts3 = landmark[80:84]

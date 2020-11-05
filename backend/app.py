@@ -152,9 +152,9 @@ def eyebrow_template():
     success, res = make_eyebrow(img, app.config)
 
     if success:
-        return jsonify(res)
+       return jsonify(res)
     else:
-        abort(400, res)
+       abort(400, res)
 
 
 @app.route('/template', methods=["GET", "POST"])

@@ -57,7 +57,7 @@ export default function VideoFeed() {
     const message = {
       "/video/EYEBROW": "/mayu",
       "/video/LIP": "/lip",
-      "/video/NOSE": "/nose",
+      "/video/HILIGHT": "/nose",
       "/video/CHEAK": "/cheak",
       "/video/eyebrow_template": "/template/eyebrow",
     };
@@ -108,27 +108,39 @@ export default function VideoFeed() {
     setMenuShown(!isMenuShown);
   };
 
+  const navs = [
+    { value: "EYEBROW", path: "/video/EYEBROW" },
+    { value: "LIP", path: "/video/LIP" },
+    { value: "HILIGHT", path: "/video/HILIGHT" },
+    { value: "CHEAK", path: "/video/CHEAK" },
+  ];
+
   return (
     <div>
-      <Header isMenuShown={isMenuShown} toggle={toggle} />
+      <Header isMenuShown={isMenuShown} toggle={toggle} navs={navs} />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown ? <SlideMenu toggle={toggle} /> : <></>}
+        {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
       </MediaQuery>
       <Direction />
       {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
       <div style={{ textAlign: "center" }}>
         <NoImage />
         {hasImage ? (
-          <canvas ref={canvasEl} width="640" height="480" />
+          <canvas
+            ref={canvasEl}
+            width="640"
+            height="480"
+            style={{ borderRadius: "20px" }}
+          />
         ) : (
           <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
         )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
-        <video ref={videoEl} />
+        <video ref={videoEl} style={{ borderRadius: "20px" }} />
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
-        <canvas ref={dummycanvasEl} />
+        <canvas ref={dummycanvasEl} style={{ borderRadius: "20px" }} />
       </div>
     </div>
   );

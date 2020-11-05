@@ -5,8 +5,7 @@ const LipMenu = () => {
   return (
     <Menu
       style={{
-        width: 300,
-        marginLeft: "50px",
+        width: 200,
         border: "none",
         position: "absolute",
       }}
@@ -15,7 +14,9 @@ const LipMenu = () => {
     >
       <Menu.Item
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
+          fontFamily: "book",
+          letterSpacing: "2px",
           marginTop: "20px",
           color: "rgba(0, 0, 0, 0.5)",
         }}
@@ -25,7 +26,9 @@ const LipMenu = () => {
       </Menu.Item>
       <Menu.Item
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
+          fontFamily: "book",
+          letterSpacing: "2px",
           marginTop: "20px",
           color: "rgba(0, 0, 0, 0.5)",
         }}
@@ -35,7 +38,9 @@ const LipMenu = () => {
       </Menu.Item>
       <Menu.Item
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
+          fontFamily: "book",
+          letterSpacing: "2px",
           marginTop: "20px",
           color: "rgba(0, 0, 0, 0.5)",
         }}
