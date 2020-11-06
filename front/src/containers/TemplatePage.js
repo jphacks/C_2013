@@ -87,7 +87,6 @@ const TemplatePage = ({ setImgURL }) => {
 
       const api = { "/template/EYEBROW": "/template/eyebrow" };
       const endpoint = window.location.pathname;
-
     });
   }, []);
 

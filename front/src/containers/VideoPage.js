@@ -137,8 +137,8 @@ export default function VideoFeed() {
             style={{ borderRadius: "20px" }}
           />
         ) : (
-            <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
-          )}
+          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+        )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} style={{ borderRadius: "20px" }} />
