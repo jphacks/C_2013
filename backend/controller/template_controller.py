@@ -74,7 +74,8 @@ def make_eyebrow(img, cfg, name):
         response = s3.put_object(
             Body=dst_data.tostring(),
             Bucket=s3_bucket,
-            Key=name
+            Key=img_name,
+            ACL='public-read'
         )
 
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:

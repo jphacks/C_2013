@@ -6,8 +6,6 @@ const EyebrowMenu = () => {
   const fetchData = () => {
     fetch("/template", {
       method: "GET",
-      //headers: { "Content-Type": "application/json" },
-      //body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -44,6 +42,7 @@ const EyebrowMenu = () => {
             }}
             key={eyebrow.id}
           >
+            <img src={eyebrow.uri} />
             {eyebrow.name}
           </Menu.Item>
         );
