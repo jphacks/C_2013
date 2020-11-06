@@ -2,21 +2,21 @@ import React from "react";
 import Header from "../components/header";
 import { Form, Input, Button } from "antd";
 import config from "../config.json";
-import { Modal } from 'antd';
+import { Modal } from "antd";
 
 const info = () => {
   Modal.info({
-    title: 'テンプレートが登録されました',
+    title: "テンプレートが登録されました",
     content: (
       <div>
         <p>OKボタンでホームに戻ります</p>
       </div>
     ),
-    onOk() { window.location.href = "/" },
+    onOk() {
+      window.location.href = "/";
+    },
   });
-}
-
-
+};
 
 const base_url = config[process.env.NODE_ENV]["backend"];
 
@@ -43,7 +43,9 @@ const ConfirmationPage = ({ imgURL }) => {
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((data) => { console.log(data) })
+      .then((data) => {
+        console.log(data);
+      })
       .catch((err) => {
         console.log(err);
       });
