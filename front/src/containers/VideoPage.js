@@ -5,6 +5,7 @@ import Header from "../components/header";
 import Direction from "../components/direction";
 import LipMenu from "../components/lipmenu";
 import NoImage from "../components/noimage";
+import EyebrowMenu from "../components/eyebrowmenu";
 
 import config from "../config.json";
 const base_url = config[process.env.NODE_ENV]["backend"];
@@ -78,7 +79,6 @@ export default function VideoFeed() {
         setHasImage(true);
       })
       .catch((err) => {
-        console.log(err);
         setHasImage(false);
       });
 
@@ -125,6 +125,7 @@ export default function VideoFeed() {
         {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
       </MediaQuery>
       <Direction />
+      {window.location.pathname === "/video/EYEBROW" ? <EyebrowMenu /> : <></>}
       {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
       <div style={{ textAlign: "center" }}>
         <NoImage />
@@ -136,8 +137,8 @@ export default function VideoFeed() {
             style={{ borderRadius: "20px" }}
           />
         ) : (
-          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
-        )}
+            <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+          )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} style={{ borderRadius: "20px" }} />

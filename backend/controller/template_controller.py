@@ -76,7 +76,7 @@ def make_eyebrow(img, cfg, name):
             Bucket=s3_bucket,
             Key=name
         )
-        print(response)
+
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:
             is_success = False
             res = {'message': 'faild uploading to s3'}
