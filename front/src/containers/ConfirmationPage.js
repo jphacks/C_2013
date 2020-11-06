@@ -10,29 +10,24 @@ const ConfirmationPage = ({ imgURL }) => {
     labelCol: { span: 8 },
     wrapperCol: { span: 10 },
   };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-  };
   const onFinish = (values) => {
     console.log("Success:", values);
-    postData();
+    postData(values.templatename);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  const postData = () => {
-    const body = { file: imgURL };
-    //const api = { "/template/EYEBROW": "/template/eyebrow" };
-    //const endpoint = window.location.pathname;
+  const postData = (templatename) => {
+    const body = { file: imgURL, name: templatename };
     fetch(base_url + "/template/eyebrow", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
-      .then((data) => {})
+      .then((data) => { console.log(data) })
       .catch((err) => {
         console.log(err);
       });
