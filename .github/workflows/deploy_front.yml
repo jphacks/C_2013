@@ -24,7 +24,7 @@ jobs:
         working-directory: ./front
 
       - name: Build
-        run: yarn build
+        run: yarn run build
         working-directory: ./front
 
       - name: Publish to AWS S3 & CloudFront
