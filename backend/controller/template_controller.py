@@ -24,7 +24,7 @@ def surround_eyebrow(img):
         return left_pts
 
 
-def make_eyebrow(img, cfg):
+def make_eyebrow(img, cfg, name):
     is_success = True
     res = {'message': 'success'}
 
@@ -48,20 +48,20 @@ def make_eyebrow(img, cfg):
         response = s3.put_object(
             Body=dst_data.tostring(),
             Bucket=s3_bucket,
-            Key=img_name
+            Key=name
         )
         print(response)
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:
             is_success = False
             res = {'message': 'faild uploading to s3'}
         else:
-            name = img_name
+            #name = img_name
             uri = 'uri'
             template = Template(name=name, uri=uri)
             database.db.session.add(template)
             database.db.session.commit()
 
-        cv2.imwrite("./result/{}.png".format(str(time.time())), left_eyebrow)
+        cv2.imwrite("./result/{}.png".format(str(time.time())+name), left_eyebrow)
 
     return is_success, res
 

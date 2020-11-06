@@ -148,8 +148,9 @@ def eyebrow_template():
         abort(400, {'message': error_message})
 
     img = request.json['file'].encode()
+    name = request.json['name']
 
-    success, res = make_eyebrow(img, app.config)
+    success, res = make_eyebrow(img, app.config, name)
 
     if success:
         return jsonify(res)
