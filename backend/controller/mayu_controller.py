@@ -65,25 +65,6 @@ def synth_mayu_temp(f_img, b_img, pos, isflip=False):
 
     result = Image.alpha_composite(layer1, c)
 
-    # # create a ROI
-    # rows, cols, channels = f_img.shape
-    # roi = b_img[y_pos:rows+y_pos, x_pos:cols+x_pos]
-
-    # # create a mask and create its inverse mask
-    # f_img_gray = cv2.cvtColor(f_img, cv2.COLOR_BGR2GRAY)
-    # ret, mask = cv2.threshold(f_img_gray, 10, 255, cv2.THRESH_BINARY)
-    # mask_inv = cv2.bitwise_not(mask)
-
-    # # black-out the area of img in ROI
-    # b_img_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
-
-    # # Take only region of template from image.
-    # f_img_bg = cv2.bitwise_and(f_img, f_img, mask=mask)
-
-    # # Put template in ROI and modify the main image
-    # dst = cv2.add(b_img_bg, f_img_bg)
-    # b_img[y_pos:rows+y_pos, x_pos:cols+x_pos] = dst
-
     return pil2cv(result)
 
 
