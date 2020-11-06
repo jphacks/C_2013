@@ -77,6 +77,17 @@ const TemplatePage = ({ setImgURL }) => {
       // canvasに画像を貼り付ける
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     });
+
+    document.querySelector("#ok").addEventListener("click", () => {
+      var can = document.getElementById("picture");
+      var URL = can.toDataURL("image/png", 0.5);
+      var dataURL = URL.substr(22);
+      setImgURL(dataURL);
+      const body = { file: dataURL };
+
+      const api = { "/template/EYEBROW": "/template/eyebrow" };
+      const endpoint = window.location.pathname;
+    });
   }, []);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
@@ -158,6 +169,7 @@ const TemplatePage = ({ setImgURL }) => {
         </Button>
         <Link to="/confirmation" style={{ color: "white" }}>
           <Button
+            id="ok"
             style={{
               visibility: isImageSubmitted ? "visible" : "hidden",
               margin: "10px",
@@ -169,7 +181,7 @@ const TemplatePage = ({ setImgURL }) => {
             >
               <SmileOutlined />
             </label>
-            確定
+            確認
           </Button>
         </Link>
       </form>
