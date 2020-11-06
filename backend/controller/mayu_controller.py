@@ -60,7 +60,7 @@ def synth_mayu_temp(f_img, b_img, pos, isflip=False):
 
     mask = layer2.copy()
 
-    layer2.putalpha(128)
+    layer2.putalpha(80)
     c.paste(layer2, (x_pos, y_pos), mask=mask)
 
     result = Image.alpha_composite(layer1, c)
