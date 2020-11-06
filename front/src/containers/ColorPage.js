@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../components/header";
 import NoImage from "../components/noimage";
 import Introduction from "../components/introduction";
+import { Link } from "react-router-dom";
 import {
   CameraOutlined,
   FrownOutlined,
@@ -10,7 +11,6 @@ import {
 } from "@ant-design/icons";
 
 import config from "../config.json";
-const base_url = config[process.env.NODE_ENV]["backend"];
 
 const Button = styled.div({
   backgroundColor: "rgba(235, 49, 188, 0.6)",
@@ -32,9 +32,8 @@ const Button = styled.div({
     transition: "all 0.1s",
   },
 });
-const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 
-const ColorPage = ({ setImgURL }) => {
+const ColorPage = ({ setPersonalColor }) => {
   const [isIntroShown, setIntroShwon] = useState(true);
   const close = () => {
     setIntroShwon(false);
@@ -92,7 +91,7 @@ const ColorPage = ({ setImgURL }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setPersonalColor(data.result);
         })
         .catch((err) => {
           console.log(err);
@@ -106,7 +105,7 @@ const ColorPage = ({ setImgURL }) => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <Header />
       {isIntroShown ? <Introduction close={close} /> : <NoImage />}
       <video
@@ -171,22 +170,24 @@ const ColorPage = ({ setImgURL }) => {
           </label>
           撮り直す
         </Button>
-        <Button
-          id="ok"
-          style={{
-            visibility:
-              isImageSubmitted && !isIntroShown ? "visible" : "hidden",
-            margin: "10px",
-            position: "relative",
-          }}
-        >
-          <label
-            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+        <Link to="/result">
+          <Button
+            id="ok"
+            style={{
+              visibility:
+                isImageSubmitted && !isIntroShown ? "visible" : "hidden",
+              margin: "10px",
+              position: "relative",
+            }}
           >
-            <SmileOutlined />
-          </label>
+            <label
+              style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+            >
+              <SmileOutlined />
+            </label>
           確認
         </Button>
+        </Link>
       </form>
     </div>
   );

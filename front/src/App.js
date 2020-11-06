@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ColorPage from "./containers/ColorPage";
 import TemplatePage from "./containers/TemplatePage";
 import ConfirmationPage from "./containers/ConfirmationPage";
+import ResultPage from "./containers/ResultPage";
 import { useState } from "react";
 
 function App() {
   const [imgURL, setImgURL] = useState("");
+  const [personalColor, setPersonalColor] = useState("")
   return (
     <Router>
       <div className="App">
@@ -18,13 +20,16 @@ function App() {
           <VideoFeed></VideoFeed>
         </Route>
         <Route path="/color">
-          <ColorPage />
+          <ColorPage setPersonalColor={setPersonalColor} />
         </Route>
         <Route path="/template">
           <TemplatePage setImgURL={setImgURL} />
         </Route>
         <Route path="/confirmation">
           <ConfirmationPage imgURL={imgURL} />
+        </Route>
+        <Route path="/result">
+          <ResultPage personalColor={personalColor} />
         </Route>
       </div>
     </Router>
