@@ -9,6 +9,32 @@ from model.template_model import Template
 import time
 import io
 
+s3 = boto3.client('s3')
+
+def get_public_url(img_name):
+    """
+    対象のS3ファイルのURLを取得する
+
+    Parameters
+    ----------
+    bucket: string
+        S3のバケット名
+    target_object_path: string
+        取得したいS3内のファイルパス
+
+    Returns
+    ----------
+    url: string
+        S3上のオブジェクトのURL
+    """
+    bucket = "jphacks2020"
+    target_object_path = img_name
+    bucket_location = s3.get_bucket_location(Bucket=bucket)
+    return "https://s3-{0}.amazonaws.com/{1}/{2}".format(
+        bucket_location['LocationConstraint'],
+        bucket,
+        target_object_path)
+
 
 def surround_eyebrow(img):
     landmarks, img = detection(img, 'SURROUNDER')
@@ -56,7 +82,8 @@ def make_eyebrow(img, cfg, name):
             res = {'message': 'faild uploading to s3'}
         else:
             #name = img_name
-            uri = 'uri'
+            #uri = 'uri'
+            uri = get_public_url(img_name)
             template = Template(name=name, uri=uri)
             database.db.session.add(template)
             database.db.session.commit()
@@ -64,7 +91,6 @@ def make_eyebrow(img, cfg, name):
         cv2.imwrite("./result/{}.png".format(str(time.time())+name), left_eyebrow)
 
     return is_success, res
-
 
 if __name__ == "__main__":
     pass
