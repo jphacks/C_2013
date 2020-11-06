@@ -4,4 +4,4 @@ venv/
 haarcascades/
 learned-models/
 __pycache__/
-a
+checkpoint/
