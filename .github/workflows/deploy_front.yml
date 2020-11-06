@@ -42,10 +42,10 @@ jobs:
         if: success()
         uses: tokorom/action-slack-incoming-webhook@master
         env:
-            INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
-            text: Successfully automated deployment.
-            attachments: |
+          text: Successfully automated deployment.
+          attachments: |
             [
                 {
                     "color": "good",
