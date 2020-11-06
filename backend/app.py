@@ -81,9 +81,14 @@ def mayu():
     if error_message:
         abort(400, {'message': error_message})
 
+    if 'img_uri' not in request.json.keys():
+        img_uri = 'https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png'
+    else:
+        img_uri = request.json['img_uri']
+
     img = request.json['file'].encode()
 
-    success, res = base_handler(mayu_handler, [img])
+    success, res = base_handler(mayu_handler, [img, img_uri])
 
     if success:
         return jsonify(res)
