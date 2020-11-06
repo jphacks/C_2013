@@ -15,15 +15,19 @@ function Header({ toggle, navs }) {
       }}
     >
       <HomeButton />
-      {navs ? <>
-        <MediaQuery query="(max-width: 900px)">
-          <MenuButton toggle={toggle} />
-        </MediaQuery>
+      {navs ? (
+        <>
+          <MediaQuery query="(max-width: 900px)">
+            <MenuButton toggle={toggle} />
+          </MediaQuery>
 
-        <MediaQuery query="(min-width: 901px)">
-          <Navbar navs={navs} />
-        </MediaQuery></>
-        : <></>}
+          <MediaQuery query="(min-width: 901px)">
+            <Navbar navs={navs} />
+          </MediaQuery>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -94,7 +94,7 @@ const TemplatePage = ({ setImgURL }) => {
         body: JSON.stringify(body),
       })
         .then((res) => res.json())
-        .then((data) => { })
+        .then((data) => {})
         .catch((err) => {
           console.log(err);
         });
@@ -194,18 +194,20 @@ const TemplatePage = ({ setImgURL }) => {
           確定
         </Button>
         <Link to="/confirmation" style={{ color: "white" }}>
-          <Button style={{
-            visibility: isImageSubmitted ? "visible" : "hidden",
-            margin: "10px",
-            position: "relative",
-          }}>
+          <Button
+            style={{
+              visibility: isImageSubmitted ? "visible" : "hidden",
+              margin: "10px",
+              position: "relative",
+            }}
+          >
             <label
               style={{ fontSize: "25px", position: "absolute", left: "30px" }}
             >
               <SmileOutlined />
             </label>
             確認
-        </Button>
+          </Button>
         </Link>
       </form>
     </div>
