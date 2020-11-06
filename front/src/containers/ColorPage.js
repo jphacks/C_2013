@@ -37,8 +37,8 @@ const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 const ColorPage = ({ setImgURL }) => {
   const [isIntroShown, setIntroShwon] = useState(true);
   const close = () => {
-    setIntroShwon(false)
-  }
+    setIntroShwon(false);
+  };
   useEffect(() => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
@@ -97,7 +97,6 @@ const ColorPage = ({ setImgURL }) => {
         .catch((err) => {
           console.log(err);
         });
-
     });
   }, []);
 
@@ -109,8 +108,7 @@ const ColorPage = ({ setImgURL }) => {
   return (
     <div>
       <Header />
-      {isIntroShown ?
-        <Introduction close={close} /> : <NoImage />}
+      {isIntroShown ? <Introduction close={close} /> : <NoImage />}
       <video
         id="camera"
         width="640"
@@ -160,7 +158,8 @@ const ColorPage = ({ setImgURL }) => {
         <Button
           onClick={restart}
           style={{
-            visibility: isImageSubmitted && !isIntroShown ? "visible" : "hidden",
+            visibility:
+              isImageSubmitted && !isIntroShown ? "visible" : "hidden",
             margin: "10px",
             position: "relative",
           }}
@@ -175,7 +174,8 @@ const ColorPage = ({ setImgURL }) => {
         <Button
           id="ok"
           style={{
-            visibility: isImageSubmitted && !isIntroShown ? "visible" : "hidden",
+            visibility:
+              isImageSubmitted && !isIntroShown ? "visible" : "hidden",
             margin: "10px",
             position: "relative",
           }}
@@ -185,8 +185,8 @@ const ColorPage = ({ setImgURL }) => {
           >
             <SmileOutlined />
           </label>
-            確認
-          </Button>
+          確認
+        </Button>
       </form>
     </div>
   );
