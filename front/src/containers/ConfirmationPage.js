@@ -2,6 +2,21 @@ import React from "react";
 import Header from "../components/header";
 import { Form, Input, Button } from "antd";
 import config from "../config.json";
+import { Modal } from 'antd';
+
+const info = () => {
+  Modal.info({
+    title: 'テンプレートが登録されました',
+    content: (
+      <div>
+        <p>OKボタンでホームに戻ります</p>
+      </div>
+    ),
+    onOk() { window.location.href = "/" },
+  });
+}
+
+
 
 const base_url = config[process.env.NODE_ENV]["backend"];
 
@@ -13,6 +28,7 @@ const ConfirmationPage = ({ imgURL }) => {
   const onFinish = (values) => {
     console.log("Success:", values);
     postData(values.templatename);
+    info();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -39,7 +55,7 @@ const ConfirmationPage = ({ imgURL }) => {
         <Form
           {...layout}
           name="basic"
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           style={{ marginBottom: "100px" }}

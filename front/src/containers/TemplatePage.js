@@ -77,28 +77,6 @@ const TemplatePage = ({ setImgURL }) => {
       // canvasに画像を貼り付ける
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     });
-
-    document.querySelector("#ok").addEventListener("click", () => {
-      var can = document.getElementById("picture");
-      var URL = can.toDataURL("image/png", 0.5);
-      var dataURL = URL.substr(22);
-      setImgURL(dataURL);
-      const body = { file: dataURL };
-
-      const api = { "/template/EYEBROW": "/template/eyebrow" };
-      const endpoint = window.location.pathname;
-
-      fetch(base_url + api[endpoint], {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .then((data) => {})
-        .catch((err) => {
-          console.log(err);
-        });
-    });
   }, []);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
@@ -178,21 +156,6 @@ const TemplatePage = ({ setImgURL }) => {
           </label>
           撮り直す
         </Button>
-        <Button
-          id="ok"
-          style={{
-            visibility: isImageSubmitted ? "visible" : "hidden",
-            margin: "10px",
-            position: "relative",
-          }}
-        >
-          <label
-            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
-          >
-            <SmileOutlined />
-          </label>
-          確定
-        </Button>
         <Link to="/confirmation" style={{ color: "white" }}>
           <Button
             style={{
@@ -206,7 +169,7 @@ const TemplatePage = ({ setImgURL }) => {
             >
               <SmileOutlined />
             </label>
-            確認
+            確定
           </Button>
         </Link>
       </form>
