@@ -10,6 +10,9 @@ import {
   SmileOutlined,
 } from "@ant-design/icons";
 
+import config from "../config.json";
+const base_url = config[process.env.NODE_ENV]["backend"];
+
 const Button = styled.div({
   backgroundColor: "rgba(235, 49, 188, 0.6)",
   fontSize: "15px",
@@ -83,7 +86,7 @@ const TemplatePage = () => {
       const api = { "/template/EYEBROW": "/template/eyebrow" };
       const endpoint = window.location.pathname;
 
-      fetch(api[endpoint], {
+      fetch(base_url + api[endpoint], {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
