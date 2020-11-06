@@ -14,6 +14,7 @@ from middleware.detect_dots import detect_dots
 from controller.nose_controller import nose_handler
 from controller.cheak_controller import cheak_handler
 from controller.template_controller import make_eyebrow
+from controller.personal_color_controller import predict_personal_color
 from db import database
 from model.template_model import Template
 
@@ -161,6 +162,19 @@ def eyebrow_template():
 @app.route('/template')
 def get_templates():
     res = {"templates": [Template.to_dict(template) for template in Template.query.all()]}
+    return jsonify(res)
+
+
+@app.route('/personal_color', methods=["POST"])
+def get_personal_color():
+    error_message = check_param(request.json, {'file': str})
+    if error_message:
+        abort(400, {'message': error_message})
+
+    img = request.json['file'].encode()
+
+    res = predict_personal_color(img)
+
     return jsonify(res)
 
 
