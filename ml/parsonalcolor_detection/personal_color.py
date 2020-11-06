@@ -30,7 +30,7 @@ transform = transforms.Compose([
 3:winter
 """
 PRETRAINED = "checkpoint/epoch=572.ckpt"
-
+# IMG_PATH="./1.png"
 def predict_Personal_Color(data):
 
     predict_model = model.FineTuningModel.load_from_checkpoint(PRETRAINED)
@@ -43,8 +43,8 @@ def predict_Personal_Color(data):
 
     output = predict_model(img).squeeze(0).detach().numpy()
     rate = {"autumn": output[0], "spring": output[1], "summer": output[2], "winter": output[3]}
-    
+
     return rate
 
 if __name__ == "__main__":
-    print(predict_Personal_Color())
+    print(predict_Personal_Color(data))

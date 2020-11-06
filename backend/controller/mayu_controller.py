@@ -3,10 +3,32 @@ import numpy as np
 
 import time
 import urllib
-
+from PIL import Image
 # from middleware.detect import detection
 from middleware.fast_detect import detection
 
+def cv2pil(image):
+    ''' OpenCV型 -> PIL型 '''
+    new_image = image.copy()
+    if new_image.ndim == 2:  # モノクロ
+        pass
+    elif new_image.shape[2] == 3:  # カラー
+        new_image = cv2.cvtColor(new_image, cv2.COLOR_BGR2RGB)
+    elif new_image.shape[2] == 4:  # 透過
+        new_image = cv2.cvtColor(new_image, cv2.COLOR_BGRA2RGBA)
+    new_image = Image.fromarray(new_image)
+    return new_image
+
+def pil2cv(image):
+    ''' PIL型 -> OpenCV型 '''
+    new_image = np.array(image, dtype=np.uint8)
+    if new_image.ndim == 2:  # モノクロ
+        pass
+    elif new_image.shape[2] == 3:  # カラー
+        new_image = cv2.cvtColor(new_image, cv2.COLOR_RGB2BGR)
+    elif new_image.shape[2] == 4:  # 透過
+        new_image = cv2.cvtColor(new_image, cv2.COLOR_RGBA2BGRA)
+    return new_image
 
 def calc_mayu_size(landmarks):
     # まゆの幅
@@ -28,28 +50,41 @@ def synth_mayu_temp(f_img, b_img, pos, isflip=False):
     else:
         # 右眉
         x_pos = pos[0]
-    y_pos = int(pos[1] - f_img.shape[0]*(4/5))
+    y_pos = int(pos[1] - f_img.shape[0] * (4 / 5))
 
-    # create a ROI
-    rows, cols, channels = f_img.shape
-    roi = b_img[y_pos:rows+y_pos, x_pos:cols+x_pos]
 
-    # create a mask and create its inverse mask
-    f_img_gray = cv2.cvtColor(f_img, cv2.COLOR_BGR2GRAY)
-    ret, mask = cv2.threshold(f_img_gray, 10, 255, cv2.THRESH_BINARY)
-    mask_inv = cv2.bitwise_not(mask)
+    layer1 = cv2pil(b_img).convert('RGBA')
+    layer2 = cv2pil(f_img).convert('RGBA')
 
-    # black-out the area of img in ROI
-    b_img_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
+    c = Image.new('RGBA', layer1.size, (255, 255, 255, 0))
 
-    # Take only region of template from image.
-    f_img_bg = cv2.bitwise_and(f_img, f_img, mask=mask)
+    mask = layer2.copy()
 
-    # Put template in ROI and modify the main image
-    dst = cv2.add(b_img_bg, f_img_bg)
-    b_img[y_pos:rows+y_pos, x_pos:cols+x_pos] = dst
+    layer2.putalpha(128)
+    c.paste(layer2, (x_pos, y_pos), mask=mask)
 
-    return b_img
+    result = Image.alpha_composite(layer1, c)
+
+    # # create a ROI
+    # rows, cols, channels = f_img.shape
+    # roi = b_img[y_pos:rows+y_pos, x_pos:cols+x_pos]
+
+    # # create a mask and create its inverse mask
+    # f_img_gray = cv2.cvtColor(f_img, cv2.COLOR_BGR2GRAY)
+    # ret, mask = cv2.threshold(f_img_gray, 10, 255, cv2.THRESH_BINARY)
+    # mask_inv = cv2.bitwise_not(mask)
+
+    # # black-out the area of img in ROI
+    # b_img_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
+
+    # # Take only region of template from image.
+    # f_img_bg = cv2.bitwise_and(f_img, f_img, mask=mask)
+
+    # # Put template in ROI and modify the main image
+    # dst = cv2.add(b_img_bg, f_img_bg)
+    # b_img[y_pos:rows+y_pos, x_pos:cols+x_pos] = dst
+
+    return pil2cv(result)
 
 
 def resize_mayu(temp_img, mayu_len):
