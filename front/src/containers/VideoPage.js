@@ -6,6 +6,9 @@ import Direction from "../components/direction";
 import LipMenu from "../components/lipmenu";
 import NoImage from "../components/noimage";
 
+import config from "../config.json";
+const base_url = config[process.env.NODE_ENV]["backend"];
+
 const LOOP_WAIT_TIME = 250;
 
 export default function VideoFeed() {
@@ -61,7 +64,7 @@ export default function VideoFeed() {
       "/video/CHEAK": "/cheak",
       "/video/eyebrow_template": "/template/eyebrow",
     };
-    await fetch(message[endpoint], {
+    await fetch(base_url + message[endpoint], {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body:
