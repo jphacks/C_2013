@@ -8,7 +8,7 @@ import torchvision.transforms as transforms
 from io import BytesIO
 import base64
 
-import model
+import ml_model
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -29,16 +29,16 @@ transform = transforms.Compose([
 2:summer
 3:winter
 """
-PRETRAINED = "checkpoint/epoch=572.ckpt"
+PRETRAINED = "learned-models/epoch=572.ckpt"
 
 
-def predict_Personal_Color():
+def predict_Personal_Color(data):
 
-    predict_model = model.FineTuningModel.load_from_checkpoint(PRETRAINED)
+    predict_model = ml_model.FineTuningModel.load_from_checkpoint(PRETRAINED)
     predict_model.eval()
 
-    # img = Image.open(BytesIO(base64.b64decode(data)))
-    img = Image.open('../../backend/img/input_1.jpg')
+    img = Image.open(BytesIO(base64.b64decode(data))).convert('RGB')
+    # img = Image.open('../../backend/img/input_1.jpg')
     img = transform(img)
     img = img.unsqueeze(0)
 
