@@ -4,6 +4,7 @@ import Header from "../components/header";
 import NoImage from "../components/noimage";
 import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
+import { Link } from "react-router-dom";
 import {
   CameraOutlined,
   FrownOutlined,
@@ -35,7 +36,7 @@ const Button = styled.div({
 });
 const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 
-const TemplatePage = () => {
+const TemplatePage = ({ setImgURL }) => {
   useEffect(() => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
@@ -81,6 +82,7 @@ const TemplatePage = () => {
       var can = document.getElementById("picture");
       var URL = can.toDataURL("image/png", 0.5);
       var dataURL = URL.substr(22);
+      setImgURL(dataURL);
       const body = { file: dataURL };
 
       const api = { "/template/EYEBROW": "/template/eyebrow" };
@@ -191,6 +193,22 @@ const TemplatePage = () => {
           </label>
           確定
         </Button>
+        <Link to="/confirmation" style={{ color: "white" }}>
+          <Button
+            style={{
+              visibility: isImageSubmitted ? "visible" : "hidden",
+              margin: "10px",
+              position: "relative",
+            }}
+          >
+            <label
+              style={{ fontSize: "25px", position: "absolute", left: "30px" }}
+            >
+              <SmileOutlined />
+            </label>
+            確認
+          </Button>
+        </Link>
       </form>
     </div>
   );
