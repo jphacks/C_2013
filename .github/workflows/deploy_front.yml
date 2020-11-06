@@ -47,15 +47,15 @@ jobs:
             text: Successfully automated deployment.
             attachments: |
             [
-            {
-                "color": "good",
-                "author_name": "${{ github.actor }}",
-                "author_icon": "${{ github.event.sender.avatar_url }}",
-                "fields": [
                 {
-                    "title": "Commit Message",
-                    "value": "${{ env.COMMIT_MESSAGE }}"
+                    "color": "good",
+                    "author_name": "${{ github.actor }}",
+                    "author_icon": "${{ github.event.sender.avatar_url }}",
+                    "fields": [
+                        {
+                            "title": "Commit Message",
+                            "value": "${{ env.COMMIT_MESSAGE }}"
+                        }
+                    ]
                 }
-                ]
-            }
             ]
