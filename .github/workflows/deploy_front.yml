@@ -1,0 +1,61 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy application to AWS S3
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Package Install
+        run: yarn install
+        working-directory: ./front
+
+      - name: Build
+        run: yarn build
+        working-directory: ./front
+
+      - name: Publish to AWS S3 & CloudFront
+        uses: opspresso/action-s3-sync@v0.2.3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "ap-northeast-1"
+          FROM_PATH: "./build"
+          DEST_PATH: ${{ secrets.FRONT_S3_BUCKET_PATH }}
+
+      - name: Set COMMIT_MESSAGE
+        run: echo ::set-env name=COMMIT_MESSAGE::$(echo "${{ github.event.head_commit.message }}" | tr '\n' ' ')
+      - name: Slack Notification on SUCCESS
+        if: success()
+        uses: tokorom/action-slack-incoming-webhook@master
+        env:
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+        text: Successfully automated deployment.
+        attachments: |
+          [
+          {
+              "color": "good",
+              "author_name": "${{ github.actor }}",
+              "author_icon": "${{ github.event.sender.avatar_url }}",
+              "fields": [
+              {
+                  "title": "Commit Message",
+                  "value": "${{ env.COMMIT_MESSAGE }}"
+              }
+              ]
+          }
+          ]
