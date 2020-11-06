@@ -26,6 +26,8 @@ jobs:
       - name: Build
         run: yarn run build
         working-directory: ./front
+        env:
+          CI: ""
 
       - name: Publish to AWS S3 & CloudFront
         uses: opspresso/action-s3-sync@v0.2.3
