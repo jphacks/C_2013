@@ -1,6 +1,6 @@
 # MAKEU
 
-![sample_img](/Users/kajiwarataishin/Desktop/jphacks2020/C_2013/sample_img.png)
+![sample_img](./sample_img.png)
 
 ## 製品概要
 
