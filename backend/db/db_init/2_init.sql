@@ -12,4 +12,4 @@ CREATE TABLE template
     INSERT INTO template
         (uri, name)
     VALUES
-        ('uri', 'sample_00');
+        ('https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png', 'default eyebrow');
