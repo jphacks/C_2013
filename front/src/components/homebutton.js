@@ -2,6 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+const HomeButton = () => (
+  <div style={{ position: "absolute", left: "0" }}>
+    <Link to="/" style={{ textDecoration: "none" }}>
+      <StyledDiv>
+        <StyledP>MAKEU</StyledP>
+      </StyledDiv>
+    </Link>
+  </div>
+);
+
 const StyledDiv = styled.div({
   width: "40px",
   height: "40px",
@@ -18,15 +28,5 @@ const StyledP = styled.p({
   transform: "rotateZ(-45deg) translateX(-17px) translateY(4px)",
   letterSpacing: "2px",
 });
-
-const HomeButton = () => (
-  <div style={{ position: "absolute", left: "0" }}>
-    <Link to="/" style={{ textDecoration: "none" }}>
-      <StyledDiv>
-        <StyledP>MAKEU</StyledP>
-      </StyledDiv>
-    </Link>
-  </div>
-);
 
 export default HomeButton;

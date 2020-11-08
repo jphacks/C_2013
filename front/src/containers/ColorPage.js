@@ -11,7 +11,6 @@ const ColorPage = ({ setPersonalColor }) => {
   const close = () => {
     setIntroShwon(false);
   };
-  const [color, setColor] = useState("")
 
   useEffect(() => {
     const video = document.querySelector("#camera");
@@ -72,7 +71,6 @@ const ColorPage = ({ setPersonalColor }) => {
       .then((res) => res.json())
       .then((data) => {
         setPersonalColor(data.result);
-        setColor(data.result)
       })
       .catch((err) => {
         console.log(err);

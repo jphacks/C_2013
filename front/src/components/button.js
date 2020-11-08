@@ -2,6 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import * as antIcon from "@ant-design/icons";
 
+const Button = ({ value, handleClick, icon }) => {
+    const Icon = antIcon[icon];
+    return (
+        <Btn onClick={handleClick}>
+            <label style={{ fontSize: "25px", position: "absolute", left: "30px" }}>
+                <Icon />
+            </label>
+            {value}
+        </Btn>
+    );
+}
+
 const Btn = styled.div({
     backgroundColor: "rgba(235, 49, 188, 0.6)",
     fontSize: "15px",
@@ -23,16 +35,5 @@ const Btn = styled.div({
         transition: "all 0.1s",
     },
 });
-const Button = ({ value, handleClick, icon }) => {
-    const Icon = antIcon[icon];
-    return (
-        <Btn onClick={handleClick}>
-            <label style={{ fontSize: "25px", position: "absolute", left: "30px" }}>
-                <Icon />
-            </label>
-            {value}
-        </Btn>
-    );
-}
 
 export default Button;

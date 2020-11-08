@@ -121,7 +121,6 @@ export default function VideoFeed() {
     { value: "CHEAK", path: "/video/CHEAK" },
   ];
 
-
   return (
     <div>
       <Header isMenuShown={isMenuShown} toggleMenuShown={toggleMenuShown} navs={navs} />
@@ -129,8 +128,8 @@ export default function VideoFeed() {
         {isMenuShown && <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />}
       </MediaQuery>
       <Direction />
-      {window.location.pathname === "/video/EYEBROW" ? <EyebrowMenu selectEyebrow={setEyebrowUri} /> : <></>}
-      {window.location.pathname === "/video/LIP" ? <LipMenu selectLip={setLipUri} /> : <></>}
+      {window.location.pathname === "/video/EYEBROW" && <EyebrowMenu selectEyebrow={setEyebrowUri} />}
+      {window.location.pathname === "/video/LIP" && <LipMenu selectLip={setLipUri} />}
       <div style={{ textAlign: "center" }}>
         <NoImage />
         {hasImage ? (

@@ -3,14 +3,6 @@ import "./logo.css";
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
-const StyledP = styled.p({
-  fontFamily: "book",
-  fontSize: "60px",
-  color: "white",
-  letterSpacing: "20px",
-  paddingTop: "10%",
-});
-
 const Logo = ({ show }) => (
   <CSSTransition
     in={show}
@@ -34,5 +26,14 @@ const Logo = ({ show }) => (
     </div>
   </CSSTransition>
 );
+
+const StyledP = styled.p({
+  fontFamily: "book",
+  fontSize: "60px",
+  color: "white",
+  letterSpacing: "20px",
+  paddingTop: "10%",
+});
+
 
 export default Logo;

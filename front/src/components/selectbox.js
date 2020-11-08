@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+const SelectBox = ({ name, path }) => (
+  <Link to={path}>
+    <StyledDiv>{name}</StyledDiv>
+  </Link>
+);
+
 const StyledDiv = styled.div({
   backgroundColor: "rgba(255, 255, 255, 0.2)",
   width: "300px",
@@ -20,11 +26,5 @@ const StyledDiv = styled.div({
     transition: "all 0.1s",
   },
 });
-
-const SelectBox = ({ name, path }) => (
-  <Link to={path}>
-    <StyledDiv>{name}</StyledDiv>
-  </Link>
-);
 
 export default SelectBox;
