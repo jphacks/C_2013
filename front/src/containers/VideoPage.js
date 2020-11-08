@@ -53,7 +53,7 @@ export default function VideoFeed() {
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
-    const img_data = await postData(dataURI);
+    const img_data = await postData(dataURI, whichLip, whichEyebrow);
 
     //画像オブジェクトを生成
     var img = new Image();
@@ -62,9 +62,9 @@ export default function VideoFeed() {
     img.onload = function () {
       canvas.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
     };
-  }, []);
+  }, [whichEyebrow, whichLip]);
 
-  const postData = async (input) => {
+  const postData = async (input, lip, eyebrow) => {
     const body = { file: input };
     let image_data = "";
     const endpoint = window.location.pathname;
@@ -80,8 +80,8 @@ export default function VideoFeed() {
       headers: { "Content-Type": "application/json" },
       body:
         endpoint === "/video/LIP"
-          ? JSON.stringify({ ...body, lip: whichLip })
-          : endpoint === "/video/EYEBROW" ? JSON.stringify({ ...body, img_uri: whichEyebrow }) : JSON.stringify(body),
+          ? JSON.stringify({ ...body, lip: lip })
+          : endpoint === "/video/EYEBROW" ? JSON.stringify({ ...body, img_uri: eyebrow }) : JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
