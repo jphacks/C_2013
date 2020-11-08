@@ -1,9 +1,10 @@
 import React from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import Header from "../components/header";
 import { Link } from "react-router-dom";
 import Recommendation from "../components/recommendation";
+import Button from "../components/button";
 
 const colors = {
   "spring!!!":
@@ -36,10 +37,8 @@ const ResultPage = ({ personalColor }) => {
           extra={[
             <Recommendation personalColor={personalColor} />,
             <Link to="/color">
-              <Button type="primary" key="console">
-                Try Again{" "}
-              </Button>
-            </Link>,
+              <Button value="Try Again" />
+            </Link>
           ]}
         />
       </div>

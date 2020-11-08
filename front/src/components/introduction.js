@@ -1,27 +1,14 @@
 import React from "react";
 import { Carousel } from "antd";
+import Button from "../components/button";
 import styled from "styled-components";
-import { CaretRightOutlined } from "@ant-design/icons";
 
-const Button = styled.div({
-  backgroundColor: "rgba(235, 49, 188, 0.6)",
-  fontSize: "15px",
-  color: "white",
-  width: "300px",
-  margin: "70px auto",
-  textAlign: "center",
-  borderRadius: "30px",
-  transition: "all 0.1s",
+const StyledP = styled.p({
   fontFamily: "arial black",
-  height: "55px",
-  lineHeight: "55px",
-  letterSpacing: "2px",
-  ":hover": {
-    backgroundColor: "rgba(235, 49, 188, 0.35)",
-    width: "290px",
-    transition: "all 0.1s",
-  },
-});
+  color: "rgb(235, 0, 255)",
+  fontSize: "23px",
+  textAlign: "center",
+})
 
 const Introduction = ({ close }) => {
   const contentStyle = {
@@ -40,79 +27,37 @@ const Introduction = ({ close }) => {
       <Carousel autoplay>
         <div>
           <h3 style={contentStyle}>
-            <p
-              style={{
-                fontFamily: "arial black",
-                color: "rgb(235, 0, 255)",
-                fontSize: "23px",
-                textAlign: "center",
-              }}
-            >
+            <StyledP>
               パーソナルカラーとは
-            </p>
+            </StyledP>
             その人の生まれ持った身体の色（肌の色・髪の色・目の色など）と雰囲気が調和した色（＝似合う色）のことであり、人それぞれ個性が違うように似合う色もそれぞれ違うとする心理学的理論に基づく審美感のことである。
           </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
-            <p
-              style={{
-                fontFamily: "arial black",
-                color: "rgb(235, 0, 255)",
-                fontSize: "23px",
-                textAlign: "center",
-              }}
-            >
+            <StyledP>
               パーソナルカラーの種類
-            </p>
+            </StyledP>
             Spring, Summer, Autumn, Winterの4種類があります。
           </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
-            <p
-              style={{
-                fontFamily: "arial black",
-                color: "rgb(235, 0, 255)",
-                fontSize: "23px",
-                textAlign: "center",
-              }}
-            >
+            <StyledP>
               パーソナルカラー診断について
-            </p>
+            </StyledP>
             顔写真から、あなたのパーソナルカラーを判定します。
           </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
-            <p
-              style={{
-                fontFamily: "arial black",
-                color: "rgb(235, 0, 255)",
-                fontSize: "23px",
-                textAlign: "center",
-                paddingTop: "40px",
-              }}
-            >
+            <StyledP style={{ paddingTop: "70px" }}>
               さあ、はじめよう！
-            </p>
-            <Button onClick={close}>今すぐ診断</Button>
+            </StyledP>
           </h3>
         </div>
       </Carousel>
-      <Button onClick={close} style={{ position: "relative" }}>
-        <label>
-          <CaretRightOutlined
-            style={{
-              fontSize: "25px",
-              position: "absolute",
-              left: "30px",
-              lineHeight: "55px",
-            }}
-          />
-        </label>
-        スキップ
-      </Button>
+      <Button handleClick={close} value="診断する" />
     </>
   );
 };
