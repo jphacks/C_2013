@@ -46,7 +46,13 @@ export default function VideoFeed() {
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
-    const img_data = await postData(dataURI, lipUri, eyebrowUri);
+
+    // const img_data = await postData(dataURI, lipUri, eyebrowUri);
+    // deploy用
+    const re_eyebrowUri =
+      "https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png";
+    const re_lipUri = "normal";
+    const img_data = await postData(dataURI, re_lipUri, re_eyebrowUri);
 
     //画像オブジェクトを生成
     var img = new Image();
