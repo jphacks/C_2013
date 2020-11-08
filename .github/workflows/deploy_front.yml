@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - release
 
 name: Deploy application to AWS S3
 
