@@ -21,7 +21,7 @@ from model.template_model import Template
 
 app = Flask(__name__)
 app.config.from_json('./config/aws.json')
-CORS(app)
+CORS(app, support_credentials=True)
 
 
 def check_param(req_json, params):
@@ -76,6 +76,7 @@ def hello_world():
 
 
 @app.route("/mayu", methods=["POST"])
+@cross_origin(supports_credentials=True)
 def mayu():
     error_message = check_param(request.json, {'file': str})
     if error_message:
@@ -97,6 +98,7 @@ def mayu():
 
 
 @app.route("/lip", methods=["POST"])
+@cross_origin(supports_credentials=True)
 def lip():
     # lip_thickness: thin or thick or normal
 
@@ -116,6 +118,7 @@ def lip():
 
 
 @app.route("/nose", methods=["POST"])
+@cross_origin(supports_credentials=True)
 def nose():
     error_message = check_param(request.json, {'file': str})
     if error_message:
@@ -140,6 +143,7 @@ def nose():
 #     return jsonify({'dots': encoded_string})
 
 @app.route("/cheak", methods=["POST"])
+@cross_origin(supports_credentials=True)
 def cheak():
     img = request.json['file'].encode()
     dst_data = cheak_handler(img)
@@ -148,6 +152,7 @@ def cheak():
 
 
 @app.route("/template/eyebrow", methods=["POST"])
+@cross_origin(supports_credentials=True)
 def eyebrow_template():
     error_message = check_param(request.json, {'file': str})
     if error_message:
@@ -171,6 +176,7 @@ def get_templates():
 
 
 @app.route('/personal_color', methods=["POST"])
+@cross_origin(supports_credentials=True)
 def get_personal_color():
     error_message = check_param(request.json, {'file': str})
     if error_message:
