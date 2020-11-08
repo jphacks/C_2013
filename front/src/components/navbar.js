@@ -7,14 +7,12 @@ const StyledDiv = styled.div({
   right: "0",
 });
 
-const Navbar = ({ navs }) => {
-  return (
-    <StyledDiv>
-      {navs.map((nav) => {
-        return <NavButton nav={nav} />;
-      })}
-    </StyledDiv>
-  );
-};
+const Navbar = ({ navs }) => (
+  <StyledDiv>
+    {navs.map((nav) => {
+      return <NavButton nav={nav} />;
+    })}
+  </StyledDiv>
+);
 
 export default Navbar;

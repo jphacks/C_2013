@@ -2,6 +2,7 @@ import React from "react";
 import { Carousel } from "antd";
 import Button from "../components/button";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledP = styled.p({
   fontFamily: "arial black",
@@ -57,7 +58,9 @@ const Introduction = ({ close }) => {
           </h3>
         </div>
       </Carousel>
-      <Button handleClick={close} value="診断する" icon="CaretRightOutlined" />
+      <Link to="/result">
+        <Button handleClick={close} value="診断する" icon="CaretRightOutlined" />
+      </Link>
     </>
   );
 };

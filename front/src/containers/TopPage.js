@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/logo";
 import Select from "../components/select";
@@ -13,20 +13,21 @@ const StyledDiv = styled.div({
 
 const TopPage = () => {
   const [isTitleShown, setTitleShown] = useState(true);
-  setTimeout(() => {
-    setTitleShown(false);
-  }, 10000);
+  useEffect(() => {
+    setTimeout(() => {
+      setTitleShown(false);
+    }, 10000);
+  }, [])
+
   return (
-    <>
-      <StyledDiv
-        onClick={() => {
-          setTitleShown(false);
-        }}
-      >
-        <Logo show={isTitleShown} />
-        {isTitleShown ? <></> : <Select />}
-      </StyledDiv>
-    </>
+    <StyledDiv
+      onClick={() => {
+        setTitleShown(false);
+      }}
+    >
+      <Logo show={isTitleShown} />
+      {!isTitleShown && <Select />}
+    </StyledDiv>
   );
 };
 

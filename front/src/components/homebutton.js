@@ -19,16 +19,14 @@ const StyledP = styled.p({
   letterSpacing: "2px",
 });
 
-const HomeButton = () => {
-  return (
-    <div style={{ position: "absolute", left: "0" }}>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <StyledDiv>
-          <StyledP>MAKEU</StyledP>
-        </StyledDiv>
-      </Link>
-    </div>
-  );
-};
+const HomeButton = () => (
+  <div style={{ position: "absolute", left: "0" }}>
+    <Link to="/" style={{ textDecoration: "none" }}>
+      <StyledDiv>
+        <StyledP>MAKEU</StyledP>
+      </StyledDiv>
+    </Link>
+  </div>
+);
 
 export default HomeButton;

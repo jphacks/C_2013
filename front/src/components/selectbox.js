@@ -21,12 +21,10 @@ const StyledDiv = styled.div({
   },
 });
 
-const SelectBox = ({ name, path }) => {
-  return (
-    <Link to={path}>
-      <StyledDiv>{name}</StyledDiv>
-    </Link>
-  );
-};
+const SelectBox = ({ name, path }) => (
+  <Link to={path}>
+    <StyledDiv>{name}</StyledDiv>
+  </Link>
+);
 
 export default SelectBox;

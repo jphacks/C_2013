@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 import HomeButton from "./homebutton";
 import MenuButton from "./menubutton";
 
-function Header({ toggle, navs }) {
+function Header({ toggleMenuShown, navs }) {
   return (
     <div
       style={{
@@ -15,19 +15,15 @@ function Header({ toggle, navs }) {
       }}
     >
       <HomeButton />
-      {navs ? (
-        <>
-          <MediaQuery query="(max-width: 900px)">
-            <MenuButton toggle={toggle} />
-          </MediaQuery>
+      {navs && <>
+        <MediaQuery query="(max-width: 900px)">
+          <MenuButton toggleMenuShown={toggleMenuShown} />
+        </MediaQuery>
 
-          <MediaQuery query="(min-width: 901px)">
-            <Navbar navs={navs} />
-          </MediaQuery>
-        </>
-      ) : (
-        <></>
-      )}
+        <MediaQuery query="(min-width: 901px)">
+          <Navbar navs={navs} />
+        </MediaQuery>
+      </>}
     </div>
   );
 }

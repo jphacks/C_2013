@@ -115,7 +115,7 @@ const ColorPage = ({ setPersonalColor }) => {
         {isImageSubmitted && !isIntroShown ?
           <>
             <Button value="撮り直す" handleClick={restart} />
-            <Link to={{ pathname: "/result", state: { color: color } }} style={{ color: "white" }} >
+            <Link to="/result" style={{ color: "white" }} >
               <Button value="確定" handleClick={ok} />
             </Link>
           </>
