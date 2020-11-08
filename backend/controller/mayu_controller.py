@@ -87,10 +87,10 @@ def mayu_handler(stream, img_uri):
         mayu_len, mayu_dist = calc_mayu_size(landmark[17:27])
 
         # テンプレート画像貼り付け
-        resp = urllib.request.urlopen(img_uri)
-        mayu_byte = np.asarray(bytearray(resp.read()), dtype="uint8")
-        mayu_img = cv2.imdecode(mayu_byte, cv2.IMREAD_UNCHANGED)
-        # mayu_img = cv2.imread('./template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
+        # resp = urllib.request.urlopen(img_uri)
+        # mayu_byte = np.asarray(bytearray(resp.read()), dtype="uint8")
+        # mayu_img = cv2.imdecode(mayu_byte, cv2.IMREAD_UNCHANGED)
+        mayu_img = cv2.imread('./template-images/mayu-1.png', cv2.IMREAD_UNCHANGED)
         mayu_img = resize_mayu(mayu_img, mayu_len)
         img = synth_mayu_temp(mayu_img, img, landmark[22], False)  # 左眉
         img = synth_mayu_temp(mayu_img, img, landmark[21], True)  # 右眉
