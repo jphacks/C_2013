@@ -25,7 +25,7 @@ def nose_handler(stream):
                        right_forehead_ep, (255, 255, 255, 255), 5)
 
     result, dst_data = cv2.imencode('.png', img)
-    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 
