@@ -13,15 +13,9 @@ const base_url = config[process.env.NODE_ENV]["backend"];
 const LOOP_WAIT_TIME = 250;
 
 export default function VideoFeed() {
-  const [whichEyebrow, setWhichEyebrow] = useState();
-  const selectEyebrow = (uri) => {
-    setWhichEyebrow(uri);
-  };
+  const [eyebrowUri, setEyebrowUri] = useState();
+  const [lipUri, setLipUri] = useState("normal");
 
-  const [whichLip, setWhichLip] = useState("normal");
-  const selectLip = (uri) => {
-    setWhichLip(uri);
-  };
   const canvasEl = useRef(null);
   const dummycanvasEl = useRef(null);
   const videoEl = useRef(null);
@@ -52,7 +46,7 @@ export default function VideoFeed() {
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
-    const img_data = await postData(dataURI, whichLip, whichEyebrow);
+    const img_data = await postData(dataURI, lipUri, eyebrowUri);
 
     //画像オブジェクトを生成
     var img = new Image();
@@ -61,7 +55,7 @@ export default function VideoFeed() {
     img.onload = function () {
       canvas.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
     };
-  }, [whichEyebrow, whichLip]);
+  }, [eyebrowUri, lipUri]);
 
   const postData = async (input, lip, eyebrow) => {
     const body = { file: input };
@@ -72,7 +66,6 @@ export default function VideoFeed() {
       "/video/LIP": "/lip",
       "/video/HILIGHT": "/nose",
       "/video/CHEAK": "/cheak",
-      "/video/eyebrow_template": "/template/eyebrow",
     };
     await fetch(base_url + message[endpoint], {
       method: "POST",
@@ -114,12 +107,11 @@ export default function VideoFeed() {
       let video = videoEl.current;
       video.srcObject = stream;
       video.play();
-      console.log(whichEyebrow);
     });
   }, [videoEl]);
 
   const [isMenuShown, setMenuShown] = useState(false);
-  const toggle = () => {
+  const toggleMenuShown = () => {
     setMenuShown(!isMenuShown);
   };
 
@@ -132,20 +124,22 @@ export default function VideoFeed() {
 
   return (
     <div>
-      <Header isMenuShown={isMenuShown} toggle={toggle} navs={navs} />
+      <Header
+        isMenuShown={isMenuShown}
+        toggleMenuShown={toggleMenuShown}
+        navs={navs}
+      />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
+        {isMenuShown && (
+          <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />
+        )}
       </MediaQuery>
       <Direction />
-      {window.location.pathname === "/video/EYEBROW" ? (
-        <EyebrowMenu selectEyebrow={selectEyebrow} />
-      ) : (
-        <></>
+      {window.location.pathname === "/video/EYEBROW" && (
+        <EyebrowMenu selectEyebrow={setEyebrowUri} />
       )}
-      {window.location.pathname === "/video/LIP" ? (
-        <LipMenu selectLip={selectLip} />
-      ) : (
-        <></>
+      {window.location.pathname === "/video/LIP" && (
+        <LipMenu selectLip={setLipUri} />
       )}
       <div style={{ textAlign: "center" }}>
         <NoImage />

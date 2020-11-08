@@ -1,46 +1,18 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import Header from "../components/header";
 import NoImage from "../components/noimage";
 import MediaQuery from "react-responsive";
 import SlideMenu from "../components/slidemenu";
 import { Link } from "react-router-dom";
-import {
-  CameraOutlined,
-  FrownOutlined,
-  SmileOutlined,
-} from "@ant-design/icons";
+import Button from "../components/button";
 
 import config from "../config.json";
 const base_url = config[process.env.NODE_ENV]["backend"];
-
-const Button = styled.div({
-  backgroundColor: "rgba(235, 49, 188, 0.6)",
-  fontSize: "15px",
-  color: "white",
-  width: "400px",
-  margin: "10px auto",
-  textAlign: "center",
-  borderRadius: "30px",
-  transition: "all 0.1s",
-  display: "inline-block",
-  fontFamily: "arial black",
-  height: "55px",
-  lineHeight: "55px",
-  letterSpacing: "2px",
-  ":hover": {
-    backgroundColor: "rgba(235, 49, 188, 0.35)",
-    width: "389px",
-    transition: "all 0.1s",
-  },
-});
 const navs = [{ value: "EYEBROW", path: "/template/EYEBROW" }];
 
 const TemplatePage = ({ setImgURL }) => {
   useEffect(() => {
     const video = document.querySelector("#camera");
-    const canvas = document.querySelector("#picture");
-
     /** カメラ設定 */
     const constraints = {
       audio: false,
@@ -66,28 +38,6 @@ const TemplatePage = ({ setImgURL }) => {
       .catch((err) => {
         console.log(err.name + ": " + err.message);
       });
-
-    /**
-     * シャッターボタン
-     */
-    document.querySelector("#shutter").addEventListener("click", () => {
-      const ctx = canvas.getContext("2d");
-      setImageSubmitted(true);
-
-      // canvasに画像を貼り付ける
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    });
-
-    document.querySelector("#ok").addEventListener("click", () => {
-      var can = document.getElementById("picture");
-      var URL = can.toDataURL("image/png", 0.5);
-      var dataURL = URL.substr(22);
-      setImgURL(dataURL);
-      const body = { file: dataURL };
-
-      const api = { "/template/EYEBROW": "/template/eyebrow" };
-      const endpoint = window.location.pathname;
-    });
   }, []);
 
   const [isImageSubmitted, setImageSubmitted] = useState(false);
@@ -95,15 +45,35 @@ const TemplatePage = ({ setImgURL }) => {
     setImageSubmitted(false);
   };
   const [isMenuShown, setMenuShown] = useState(false);
-  const toggle = () => {
+  const toggleMenuShown = () => {
     setMenuShown(!isMenuShown);
+  };
+
+  // シャッター
+  const shutter = () => {
+    const video = document.querySelector("#camera");
+    const canvas = document.querySelector("#picture");
+    const ctx = canvas.getContext("2d");
+    setImageSubmitted(true);
+
+    // canvasに画像を貼り付ける
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  };
+
+  const ok = () => {
+    var can = document.getElementById("picture");
+    var URL = can.toDataURL("image/png", 0.5);
+    var dataURL = URL.substr(22);
+    setImgURL(dataURL);
   };
 
   return (
     <div style={{ height: window.innerHeight, textAlign: "center" }}>
-      <Header navs={navs} toggle={toggle} />
+      <Header navs={navs} toggleMenuShown={toggleMenuShown} />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
+        {isMenuShown && (
+          <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />
+        )}
       </MediaQuery>
       <NoImage />
       <video
@@ -135,55 +105,24 @@ const TemplatePage = ({ setImgURL }) => {
         ></canvas>
       </div>
       <form>
-        <Button
-          id="shutter"
-          style={{
-            visibility: isImageSubmitted ? "hidden" : "visible",
-            position: "absolute",
-            left: "0",
-            right: "0",
-            margin: "10px auto",
-          }}
-        >
-          <label
-            style={{ position: "absolute", left: "30px", fontSize: "25px" }}
-          >
-            <CameraOutlined />
-          </label>
-          シャッター
-        </Button>
-        <Button
-          onClick={restart}
-          style={{
-            visibility: isImageSubmitted ? "visible" : "hidden",
-            margin: "10px",
-            position: "relative",
-          }}
-        >
-          <label
-            style={{ fontSize: "25px", position: "absolute", left: "30px" }}
-          >
-            <FrownOutlined />
-          </label>
-          撮り直す
-        </Button>
-        <Link to="/confirmation" style={{ color: "white" }}>
+        {isImageSubmitted ? (
+          <>
+            <Button
+              value="撮り直す"
+              handleClick={restart}
+              icon="FrownOutlined"
+            />
+            <Link to="/confirmation" style={{ color: "white" }}>
+              <Button value="確定" handleClick={ok} icon="SmileOutlined" />
+            </Link>
+          </>
+        ) : (
           <Button
-            id="ok"
-            style={{
-              visibility: isImageSubmitted ? "visible" : "hidden",
-              margin: "10px",
-              position: "relative",
-            }}
-          >
-            <label
-              style={{ fontSize: "25px", position: "absolute", left: "30px" }}
-            >
-              <SmileOutlined />
-            </label>
-            確認
-          </Button>
-        </Link>
+            value="シャッター"
+            handleClick={shutter}
+            icon="CameraOutlined"
+          />
+        )}
       </form>
     </div>
   );
