@@ -6,6 +6,7 @@ import TemplatePage from "./containers/TemplatePage";
 import ConfirmationPage from "./containers/ConfirmationPage";
 import ResultPage from "./containers/ResultPage";
 import { useState } from "react";
+import ErrorPage from "./containers/ErrorPage";
 
 function App() {
   const [imgURL, setImgURL] = useState("");
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/result">
           <ResultPage personalColor={personalColor} />
+        </Route>
+        <Route path="/error">
+          <ErrorPage />
         </Route>
       </div>
     </Router>

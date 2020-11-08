@@ -3,7 +3,8 @@ import Header from "../components/header";
 import { Form, Input, Button } from "antd";
 import config from "../config.json";
 import { Modal } from "antd";
-
+import { Redirect } from "react-router-dom"
+  ;
 const info = () => {
   Modal.info({
     title: "テンプレートが登録されました",
@@ -18,21 +19,18 @@ const info = () => {
   });
 };
 
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 10 },
+};
+
 const base_url = config[process.env.NODE_ENV]["backend"];
 
 const ConfirmationPage = ({ imgURL }) => {
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 10 },
-  };
   const onFinish = (values) => {
     console.log("Success:", values);
     postData(values.templatename);
     info();
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   const postData = (templatename) => {
@@ -52,32 +50,34 @@ const ConfirmationPage = ({ imgURL }) => {
   };
   return (
     <>
-      <Header />
-      <div style={{ width: "90%", margin: "auto", fontFamily: "book" }}>
-        <Form
-          {...layout}
-          name="basic"
-          initialValues={{ remember: false }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          style={{ marginBottom: "100px" }}
-        >
-          <Form.Item
-            label="テンプレート名"
-            name="templatename"
-            rules={[
-              { required: true, message: "テンプレートに名前をつけてね" },
-            ]}
+      {imgURL ? <Redirect to="/error" /> : <>
+        <Header />
+        <div style={{ width: "90%", margin: "auto", fontFamily: "book" }}>
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{ remember: false }}
+            onFinish={onFinish}
+            onFinishFailed={<Redirect to="/error" />}
+            style={{ marginBottom: "100px" }}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item style={{ margin: "auto", width: "75px" }}>
-            <Button type="primary" htmlType="submit" style={{ margin: "auto" }}>
-              Submit
+            <Form.Item
+              label="テンプレート名"
+              name="templatename"
+              rules={[
+                { required: true, message: "テンプレートに名前をつけてね" },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item style={{ margin: "auto", width: "75px" }}>
+              <Button type="primary" htmlType="submit" style={{ margin: "auto" }}>
+                Submit
             </Button>
-          </Form.Item>
-        </Form>
-      </div>
+            </Form.Item>
+          </Form>
+        </div>
+      </>}
     </>
   );
 };
