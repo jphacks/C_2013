@@ -64,7 +64,7 @@ def lip_handler(stream, lip_thickness):
             img = cv2.arrowedLine(img, mouth_sp, mouth_ep, MOUTH_COLORS[i], 2)
 
     result, dst_data = cv2.imencode('.png', img)
-    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 

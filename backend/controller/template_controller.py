@@ -11,6 +11,7 @@ import io
 
 s3 = boto3.client('s3')
 
+
 def get_public_url(img_name):
     """
     対象のS3ファイルのURLを取得する
@@ -89,9 +90,10 @@ def make_eyebrow(img, cfg, name):
             database.db.session.add(template)
             database.db.session.commit()
 
-        cv2.imwrite("./result/{}.png".format(str(time.time())+name), left_eyebrow)
+        # cv2.imwrite("./result/{}.png".format(str(time.time())+name), left_eyebrow)
 
     return is_success, res
+
 
 if __name__ == "__main__":
     pass

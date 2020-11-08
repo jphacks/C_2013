@@ -7,6 +7,7 @@ from PIL import Image
 # from middleware.detect import detection
 from middleware.fast_detect import detection
 
+
 def cv2pil(image):
     ''' OpenCV型 -> PIL型 '''
     new_image = image.copy()
@@ -19,6 +20,7 @@ def cv2pil(image):
     new_image = Image.fromarray(new_image)
     return new_image
 
+
 def pil2cv(image):
     ''' PIL型 -> OpenCV型 '''
     new_image = np.array(image, dtype=np.uint8)
@@ -29,6 +31,7 @@ def pil2cv(image):
     elif new_image.shape[2] == 4:  # 透過
         new_image = cv2.cvtColor(new_image, cv2.COLOR_RGBA2BGRA)
     return new_image
+
 
 def calc_mayu_size(landmarks):
     # まゆの幅
@@ -51,7 +54,6 @@ def synth_mayu_temp(f_img, b_img, pos, isflip=False):
         # 右眉
         x_pos = pos[0]
     y_pos = int(pos[1] - f_img.shape[0] * (4 / 5))
-
 
     layer1 = cv2pil(b_img).convert('RGBA')
     layer2 = cv2pil(f_img).convert('RGBA')
@@ -94,7 +96,7 @@ def mayu_handler(stream, img_uri):
         img = synth_mayu_temp(mayu_img, img, landmark[21], True)  # 右眉
 
     result, dst_data = cv2.imencode('.png', img)
-    cv2.imwrite("./result/{}.png".format(str(time.time())), img)
+    # cv2.imwrite("./result/{}.png".format(str(time.time())), img)
 
     return dst_data
 
