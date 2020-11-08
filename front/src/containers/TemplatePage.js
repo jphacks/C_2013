@@ -45,7 +45,7 @@ const TemplatePage = ({ setImgURL }) => {
     setImageSubmitted(false);
   };
   const [isMenuShown, setMenuShown] = useState(false);
-  const toggle = () => {
+  const toggleMenuShown = () => {
     setMenuShown(!isMenuShown);
   };
 
@@ -53,7 +53,6 @@ const TemplatePage = ({ setImgURL }) => {
   const shutter = () => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
-    console.log("test")
     const ctx = canvas.getContext("2d");
     setImageSubmitted(true);
 
@@ -70,9 +69,9 @@ const TemplatePage = ({ setImgURL }) => {
 
   return (
     <div style={{ height: window.innerHeight, textAlign: "center" }}>
-      <Header navs={navs} toggle={toggle} />
+      <Header navs={navs} toggleMenuShown={toggleMenuShown} />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
+        {isMenuShown && <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />}
       </MediaQuery>
       <NoImage />
       <video
@@ -106,12 +105,12 @@ const TemplatePage = ({ setImgURL }) => {
       <form>
         {isImageSubmitted ?
           <>
-            <Button value="撮り直す" handleClick={restart} />
+            <Button value="撮り直す" handleClick={restart} icon="FrownOutlined" />
             <Link to="/confirmation" style={{ color: "white" }} >
-              <Button value="確定" handleClick={ok} />
+              <Button value="確定" handleClick={ok} icon="SmileOutlined" />
             </Link>
           </>
-          : <Button value="シャッター" handleClick={shutter} />}
+          : <Button value="シャッター" handleClick={shutter} icon="CameraOutlined" />}
       </form>
     </div >
   );

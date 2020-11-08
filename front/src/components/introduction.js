@@ -57,7 +57,7 @@ const Introduction = ({ close }) => {
           </h3>
         </div>
       </Carousel>
-      <Button handleClick={close} value="診断する" />
+      <Button handleClick={close} value="診断する" icon="CaretRightOutlined" />
     </>
   );
 };

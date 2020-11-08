@@ -11,6 +11,8 @@ const ColorPage = ({ setPersonalColor }) => {
   const close = () => {
     setIntroShwon(false);
   };
+  const [color, setColor] = useState("")
+
   useEffect(() => {
     const video = document.querySelector("#camera");
 
@@ -70,6 +72,7 @@ const ColorPage = ({ setPersonalColor }) => {
       .then((res) => res.json())
       .then((data) => {
         setPersonalColor(data.result);
+        setColor(data.result)
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +115,7 @@ const ColorPage = ({ setPersonalColor }) => {
         {isImageSubmitted && !isIntroShown ?
           <>
             <Button value="撮り直す" handleClick={restart} />
-            <Link to="/result" style={{ color: "white" }} >
+            <Link to={{ pathname: "/result", state: { color: color } }} style={{ color: "white" }} >
               <Button value="確定" handleClick={ok} />
             </Link>
           </>

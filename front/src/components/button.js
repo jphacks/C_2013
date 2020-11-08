@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    CameraOutlined,
-    FrownOutlined,
-    SmileOutlined,
-    CaretRightOutlined
-} from "@ant-design/icons";
+import * as antIcon from "@ant-design/icons";
 
 const Btn = styled.div({
     backgroundColor: "rgba(235, 49, 188, 0.6)",
@@ -28,15 +23,12 @@ const Btn = styled.div({
         transition: "all 0.1s",
     },
 });
-const Button = ({ value, handleClick }) => {
+const Button = ({ value, handleClick, icon }) => {
+    const Icon = antIcon[icon];
     return (
         <Btn onClick={handleClick}>
             <label style={{ fontSize: "25px", position: "absolute", left: "30px" }}>
-                {value === "シャッター"
-                    ? <CameraOutlined />
-                    : value === "撮り直す"
-                        ? <FrownOutlined />
-                        : value === "確定" ? <SmileOutlined /> : <CaretRightOutlined />}
+                <Icon />
             </label>
             {value}
         </Btn>
