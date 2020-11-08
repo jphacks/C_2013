@@ -13,6 +13,15 @@ const base_url = config[process.env.NODE_ENV]["backend"];
 const LOOP_WAIT_TIME = 250;
 
 export default function VideoFeed() {
+  const [whichEyebrow, setWhichEyebrow] = useState();
+  const selectEyebrow = (uri) => {
+    setWhichEyebrow(uri);
+  };
+
+  const [whichLip, setWhichLip] = useState("normal");
+  const selectLip = (uri) => {
+    setWhichLip(uri);
+  };
   const canvasEl = useRef(null);
   const dummycanvasEl = useRef(null);
   const videoEl = useRef(null);
@@ -43,7 +52,7 @@ export default function VideoFeed() {
     const dataURI = dummyCanvasElement
       .toDataURL("image/png", 0.5)
       .replace(/^.*,/, "");
-    const img_data = await postData(dataURI);
+    const img_data = await postData(dataURI, whichLip, whichEyebrow);
 
     //画像オブジェクトを生成
     var img = new Image();
@@ -52,9 +61,9 @@ export default function VideoFeed() {
     img.onload = function () {
       canvas.drawImage(img, 0, 0, canvasElement.width, canvasElement.height);
     };
-  }, []);
+  }, [whichEyebrow, whichLip]);
 
-  const postData = async (input) => {
+  const postData = async (input, lip, eyebrow) => {
     const body = { file: input };
     let image_data = "";
     const endpoint = window.location.pathname;
@@ -70,7 +79,9 @@ export default function VideoFeed() {
       headers: { "Content-Type": "application/json" },
       body:
         endpoint === "/video/LIP"
-          ? JSON.stringify({ ...body, lip: "normal" })
+          ? JSON.stringify({ ...body, lip: lip })
+          : endpoint === "/video/EYEBROW"
+          ? JSON.stringify({ ...body, img_uri: eyebrow })
           : JSON.stringify(body),
     })
       .then((res) => res.json())
@@ -103,6 +114,7 @@ export default function VideoFeed() {
       let video = videoEl.current;
       video.srcObject = stream;
       video.play();
+      console.log(whichEyebrow);
     });
   }, [videoEl]);
 
@@ -125,8 +137,16 @@ export default function VideoFeed() {
         {isMenuShown ? <SlideMenu menus={navs} toggle={toggle} /> : <></>}
       </MediaQuery>
       <Direction />
-      {window.location.pathname === "/video/EYEBROW" ? <EyebrowMenu /> : <></>}
-      {window.location.pathname === "/video/LIP" ? <LipMenu /> : <></>}
+      {window.location.pathname === "/video/EYEBROW" ? (
+        <EyebrowMenu selectEyebrow={selectEyebrow} />
+      ) : (
+        <></>
+      )}
+      {window.location.pathname === "/video/LIP" ? (
+        <LipMenu selectLip={selectLip} />
+      ) : (
+        <></>
+      )}
       <div style={{ textAlign: "center" }}>
         <NoImage />
         {hasImage ? (

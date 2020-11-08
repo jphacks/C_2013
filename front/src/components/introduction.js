@@ -49,9 +49,9 @@ const Introduction = ({ close }) => {
               }}
             >
               パーソナルカラーとは
-          </p>
-          その人の生まれ持った身体の色（肌の色・髪の色・目の色など）と雰囲気が調和した色（＝似合う色）のことであり、人それぞれ個性が違うように似合う色もそれぞれ違うとする心理学的理論に基づく審美感のことである。
-        </h3>
+            </p>
+            その人の生まれ持った身体の色（肌の色・髪の色・目の色など）と雰囲気が調和した色（＝似合う色）のことであり、人それぞれ個性が違うように似合う色もそれぞれ違うとする心理学的理論に基づく審美感のことである。
+          </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
@@ -64,9 +64,9 @@ const Introduction = ({ close }) => {
               }}
             >
               パーソナルカラーの種類
-          </p>
-          Spring, Summer, Autumn, Winterの4種類があります。
-        </h3>
+            </p>
+            Spring, Summer, Autumn, Winterの4種類があります。
+          </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
@@ -79,9 +79,9 @@ const Introduction = ({ close }) => {
               }}
             >
               パーソナルカラー診断について
-          </p>
-          顔写真から、あなたのパーソナルカラーを判定します。
-        </h3>
+            </p>
+            顔写真から、あなたのパーソナルカラーを判定します。
+          </h3>
         </div>
         <div>
           <h3 style={contentStyle}>
@@ -95,17 +95,24 @@ const Introduction = ({ close }) => {
               }}
             >
               さあ、はじめよう！
-          </p>
+            </p>
             <Button onClick={close}>今すぐ診断</Button>
           </h3>
         </div>
       </Carousel>
       <Button onClick={close} style={{ position: "relative" }}>
-        <label >
-          <CaretRightOutlined style={{ fontSize: "25px", position: "absolute", left: "30px", lineHeight: "55px" }} />
+        <label>
+          <CaretRightOutlined
+            style={{
+              fontSize: "25px",
+              position: "absolute",
+              left: "30px",
+              lineHeight: "55px",
+            }}
+          />
         </label>
-            スキップ
-          </Button>
+        スキップ
+      </Button>
     </>
   );
 };

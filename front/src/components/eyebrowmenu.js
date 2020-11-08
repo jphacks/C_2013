@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 
-const EyebrowMenu = () => {
+const EyebrowMenu = ({ selectEyebrow }) => {
   const [eyebrows, setEyebrows] = useState([]);
   const fetchData = () => {
     fetch("/template", {
@@ -41,8 +41,10 @@ const EyebrowMenu = () => {
               color: "rgba(0, 0, 0, 0.5)",
             }}
             key={eyebrow.id}
+            onClick={() => {
+              selectEyebrow(eyebrow.uri);
+            }}
           >
-            <img src={eyebrow.uri} />
             {eyebrow.name}
           </Menu.Item>
         );

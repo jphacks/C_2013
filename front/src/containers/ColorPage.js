@@ -185,8 +185,8 @@ const ColorPage = ({ setPersonalColor }) => {
             >
               <SmileOutlined />
             </label>
-          確認
-        </Button>
+            確認
+          </Button>
         </Link>
       </form>
     </div>

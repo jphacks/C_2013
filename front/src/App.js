@@ -9,7 +9,7 @@ import { useState } from "react";
 
 function App() {
   const [imgURL, setImgURL] = useState("");
-  const [personalColor, setPersonalColor] = useState("")
+  const [personalColor, setPersonalColor] = useState("");
   return (
     <Router>
       <div className="App">
