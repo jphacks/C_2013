@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "antd";
 
-const LipMenu = () => {
+const LipMenu = ({ selectLip }) => {
   return (
     <Menu
       style={{
@@ -21,6 +21,7 @@ const LipMenu = () => {
           color: "rgba(0, 0, 0, 0.5)",
         }}
         key="normal"
+        onClick={() => { selectLip("normal") }}
       >
         Normal
       </Menu.Item>
@@ -33,6 +34,7 @@ const LipMenu = () => {
           color: "rgba(0, 0, 0, 0.5)",
         }}
         key="thin"
+        onClick={() => { selectLip("thin") }}
       >
         Thin
       </Menu.Item>
@@ -45,6 +47,7 @@ const LipMenu = () => {
           color: "rgba(0, 0, 0, 0.5)",
         }}
         key="thick"
+        onClick={() => { selectLip("thick") }}
       >
         Thick
       </Menu.Item>
