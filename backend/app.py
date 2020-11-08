@@ -188,7 +188,7 @@ if __name__ == "__main__":
     db_config = {
         'user': os.getenv('DB_USER'),
         'password': os.getenv('DB_PASS'),
-        'host': 'mysql',
+        'host': os.getenv('DB_HOST'),
         'db_name': os.getenv('DB_NAME')
     }
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**db_config)

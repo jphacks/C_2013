@@ -49,7 +49,7 @@ const ConfirmationPage = ({ imgURL }) => {
   };
   return (
     <>
-      {imgURL ? (
+      {!imgURL ? (
         <Redirect to="/error" />
       ) : (
         <>
