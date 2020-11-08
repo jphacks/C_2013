@@ -41,7 +41,9 @@ const EyebrowMenu = ({ selectEyebrow }) => {
               color: "rgba(0, 0, 0, 0.5)",
             }}
             key={eyebrow.id}
-            onClick={() => { selectEyebrow(eyebrow.uri) }}
+            onClick={() => {
+              selectEyebrow(eyebrow.uri);
+            }}
           >
             {eyebrow.name}
           </Menu.Item>
