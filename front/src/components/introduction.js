@@ -23,25 +23,19 @@ const Introduction = ({ close }) => (
     <Carousel autoplay>
       <div>
         <h3 style={contentStyle}>
-          <StyledP>
-            {messages.page1.title}
-          </StyledP>
+          <StyledP>{messages.page1.title}</StyledP>
           {messages.page1.content}
         </h3>
       </div>
       <div>
         <h3 style={contentStyle}>
-          <StyledP>
-            {messages.page2.title}
-          </StyledP>
+          <StyledP>{messages.page2.title}</StyledP>
           {messages.page2.content}
         </h3>
       </div>
       <div>
         <h3 style={contentStyle}>
-          <StyledP>
-            {messages.page3.title}
-          </StyledP>
+          <StyledP>{messages.page3.title}</StyledP>
           {messages.page3.content}
         </h3>
       </div>
@@ -64,6 +58,6 @@ const StyledP = styled.p({
   color: "rgb(235, 0, 255)",
   fontSize: "23px",
   textAlign: "center",
-})
+});
 
 export default Introduction;

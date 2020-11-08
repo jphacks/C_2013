@@ -35,5 +35,4 @@ const StyledP = styled.p({
   paddingTop: "10%",
 });
 
-
 export default Logo;

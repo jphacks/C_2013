@@ -1,6 +1,6 @@
 import React from "react";
 
-const colors = require("./recommendation.json")
+const colors = require("./recommendation.json");
 
 const Recommendation = ({ personalColor }) => {
   const recommendations = colors[personalColor];
@@ -15,7 +15,7 @@ const Recommendation = ({ personalColor }) => {
       >
         おすすめのカラー
       </p>
-      {recommendations.map((color) =>
+      {recommendations.map((color) => (
         <div
           style={{
             width: "100px",
@@ -23,8 +23,9 @@ const Recommendation = ({ personalColor }) => {
             backgroundColor: color,
             display: "inline-block",
             border: "solid 1px white",
-          }} />
-      )}
+          }}
+        />
+      ))}
     </div>
   );
 };

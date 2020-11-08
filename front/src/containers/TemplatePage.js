@@ -58,20 +58,22 @@ const TemplatePage = ({ setImgURL }) => {
 
     // canvasに画像を貼り付ける
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  }
+  };
 
   const ok = () => {
     var can = document.getElementById("picture");
     var URL = can.toDataURL("image/png", 0.5);
     var dataURL = URL.substr(22);
     setImgURL(dataURL);
-  }
+  };
 
   return (
     <div style={{ height: window.innerHeight, textAlign: "center" }}>
       <Header navs={navs} toggleMenuShown={toggleMenuShown} />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown && <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />}
+        {isMenuShown && (
+          <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />
+        )}
       </MediaQuery>
       <NoImage />
       <video
@@ -103,16 +105,26 @@ const TemplatePage = ({ setImgURL }) => {
         ></canvas>
       </div>
       <form>
-        {isImageSubmitted ?
+        {isImageSubmitted ? (
           <>
-            <Button value="撮り直す" handleClick={restart} icon="FrownOutlined" />
-            <Link to="/confirmation" style={{ color: "white" }} >
+            <Button
+              value="撮り直す"
+              handleClick={restart}
+              icon="FrownOutlined"
+            />
+            <Link to="/confirmation" style={{ color: "white" }}>
               <Button value="確定" handleClick={ok} icon="SmileOutlined" />
             </Link>
           </>
-          : <Button value="シャッター" handleClick={shutter} icon="CameraOutlined" />}
+        ) : (
+          <Button
+            value="シャッター"
+            handleClick={shutter}
+            icon="CameraOutlined"
+          />
+        )}
       </form>
-    </div >
+    </div>
   );
 };
 

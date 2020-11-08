@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SlideMenuButton = ({ value, path }) =>
+const SlideMenuButton = ({ value, path }) => (
   <NavLink
     to={path}
     style={{
@@ -13,6 +13,7 @@ const SlideMenuButton = ({ value, path }) =>
     activeStyle={{ color: "rgb(235,0, 255)", textDecoration: "underline" }}
   >
     {value}
-  </NavLink>;
+  </NavLink>
+);
 
 export default SlideMenuButton;

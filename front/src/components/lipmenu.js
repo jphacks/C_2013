@@ -25,7 +25,7 @@ const LipMenu = ({ selectLip }) => (
       }}
     >
       Normal
-      </Menu.Item>
+    </Menu.Item>
     <Menu.Item
       style={{
         fontSize: "20px",
@@ -40,7 +40,7 @@ const LipMenu = ({ selectLip }) => (
       }}
     >
       Thin
-      </Menu.Item>
+    </Menu.Item>
     <Menu.Item
       style={{
         fontSize: "20px",
@@ -55,7 +55,7 @@ const LipMenu = ({ selectLip }) => (
       }}
     >
       Thick
-      </Menu.Item>
+    </Menu.Item>
   </Menu>
 );
 

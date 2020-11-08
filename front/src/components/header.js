@@ -14,7 +14,7 @@ const Header = ({ toggleMenuShown, navs }) => (
     }}
   >
     <HomeButton />
-    {navs &&
+    {navs && (
       <>
         <MediaQuery query="(max-width: 900px)">
           <MenuButton toggleMenuShown={toggleMenuShown} />
@@ -23,7 +23,8 @@ const Header = ({ toggleMenuShown, navs }) => (
         <MediaQuery query="(min-width: 901px)">
           <Navbar navs={navs} />
         </MediaQuery>
-      </>}
+      </>
+    )}
   </div>
 );
 

@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 const Navbar = ({ navs }) => (
   <StyledDiv>
-    {navs.map((nav) => <NavButton nav={nav} />)}
+    {navs.map((nav) => (
+      <NavButton nav={nav} />
+    ))}
   </StyledDiv>
 );
 

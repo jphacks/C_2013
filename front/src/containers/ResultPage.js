@@ -11,7 +11,9 @@ const colors = require("./resultpage.json");
 
 const ResultPage = ({ personalColor }) => (
   <>
-    {!personalColor ? <Redirect to="/error" /> :
+    {!personalColor ? (
+      <Redirect to="/error" />
+    ) : (
       <>
         <Header />
         <div
@@ -31,11 +33,12 @@ const ResultPage = ({ personalColor }) => (
               <Recommendation personalColor={personalColor} />,
               <Link to="/color">
                 <Button value="Try Again" icon="SearchOutlined" />
-              </Link>
+              </Link>,
             ]}
           />
         </div>
-      </>}
+      </>
+    )}
   </>
 );
 

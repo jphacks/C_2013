@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const message = require("./direction.json")
+const message = require("./direction.json");
 
 const Direction = () => {
   const url = window.location.pathname;

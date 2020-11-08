@@ -13,7 +13,6 @@ const base_url = config[process.env.NODE_ENV]["backend"];
 const LOOP_WAIT_TIME = 250;
 
 export default function VideoFeed() {
-
   const [eyebrowUri, setEyebrowUri] = useState();
   const [lipUri, setLipUri] = useState("normal");
 
@@ -66,7 +65,7 @@ export default function VideoFeed() {
       "/video/EYEBROW": "/mayu",
       "/video/LIP": "/lip",
       "/video/HILIGHT": "/nose",
-      "/video/CHEAK": "/cheak"
+      "/video/CHEAK": "/cheak",
     };
     await fetch(base_url + message[endpoint], {
       method: "POST",
@@ -74,7 +73,9 @@ export default function VideoFeed() {
       body:
         endpoint === "/video/LIP"
           ? JSON.stringify({ ...body, lip: lip })
-          : endpoint === "/video/EYEBROW" ? JSON.stringify({ ...body, img_uri: eyebrow }) : JSON.stringify(body),
+          : endpoint === "/video/EYEBROW"
+          ? JSON.stringify({ ...body, img_uri: eyebrow })
+          : JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -123,13 +124,23 @@ export default function VideoFeed() {
 
   return (
     <div>
-      <Header isMenuShown={isMenuShown} toggleMenuShown={toggleMenuShown} navs={navs} />
+      <Header
+        isMenuShown={isMenuShown}
+        toggleMenuShown={toggleMenuShown}
+        navs={navs}
+      />
       <MediaQuery query="(max-width: 870px)">
-        {isMenuShown && <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />}
+        {isMenuShown && (
+          <SlideMenu menus={navs} toggleMenuShown={toggleMenuShown} />
+        )}
       </MediaQuery>
       <Direction />
-      {window.location.pathname === "/video/EYEBROW" && <EyebrowMenu selectEyebrow={setEyebrowUri} />}
-      {window.location.pathname === "/video/LIP" && <LipMenu selectLip={setLipUri} />}
+      {window.location.pathname === "/video/EYEBROW" && (
+        <EyebrowMenu selectEyebrow={setEyebrowUri} />
+      )}
+      {window.location.pathname === "/video/LIP" && (
+        <LipMenu selectLip={setLipUri} />
+      )}
       <div style={{ textAlign: "center" }}>
         <NoImage />
         {hasImage ? (
@@ -140,8 +151,8 @@ export default function VideoFeed() {
             style={{ borderRadius: "20px" }}
           />
         ) : (
-            <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
-          )}
+          <canvas ref={canvasEl} style={{ visibility: "hidden" }} />
+        )}
       </div>
       <div style={{ textAlign: "center", visibility: "hidden" }}>
         <video ref={videoEl} style={{ borderRadius: "20px" }} />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const NoImage = () =>
+const NoImage = () => (
   <div
     style={{
       left: "0",
@@ -21,7 +21,6 @@ const NoImage = () =>
     }}
   >
     NO IMAGE
-    </div>
-  ;
-
+  </div>
+);
 export default NoImage;

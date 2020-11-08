@@ -17,7 +17,7 @@ const TopPage = () => {
     setTimeout(() => {
       setTitleShown(false);
     }, 10000);
-  }, [])
+  }, []);
 
   return (
     <StyledDiv

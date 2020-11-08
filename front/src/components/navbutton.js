@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavButton = ({ nav }) =>
+const NavButton = ({ nav }) => (
   <NavLink
     to={nav.path}
     style={{
@@ -17,6 +17,7 @@ const NavButton = ({ nav }) =>
     activeStyle={{ color: "rgb(235,0, 255)", textDecoration: "underline" }}
   >
     {nav.value}
-  </NavLink>;
+  </NavLink>
+);
 
 export default NavButton;

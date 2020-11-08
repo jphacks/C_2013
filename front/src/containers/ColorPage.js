@@ -3,7 +3,7 @@ import Header from "../components/header";
 import NoImage from "../components/noimage";
 import Introduction from "../components/introduction";
 import Button from "../components/button";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import config from "../config.json";
 
 const ColorPage = ({ setPersonalColor }) => {
@@ -50,13 +50,13 @@ const ColorPage = ({ setPersonalColor }) => {
   const shutter = () => {
     const video = document.querySelector("#camera");
     const canvas = document.querySelector("#picture");
-    console.log("test")
+    console.log("test");
     const ctx = canvas.getContext("2d");
     setImageSubmitted(true);
 
     // canvasに画像を貼り付ける
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  }
+  };
 
   const ok = () => {
     var can = document.getElementById("picture");
@@ -75,7 +75,7 @@ const ColorPage = ({ setPersonalColor }) => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -110,15 +110,18 @@ const ColorPage = ({ setPersonalColor }) => {
         ></canvas>
       </div>
       <form>
-        {isImageSubmitted && !isIntroShown ?
+        {isImageSubmitted && !isIntroShown ? (
           <>
             <Button value="撮り直す" handleClick={restart} />
-            <Link to="/result" style={{ color: "white" }} >
+            <Link to="/result" style={{ color: "white" }}>
               <Button value="確定" handleClick={ok} />
             </Link>
           </>
-          : isIntroShown ? <></>
-            : <Button value="シャッター" handleClick={shutter} />}
+        ) : isIntroShown ? (
+          <></>
+        ) : (
+          <Button value="シャッター" handleClick={shutter} />
+        )}
       </form>
     </div>
   );
