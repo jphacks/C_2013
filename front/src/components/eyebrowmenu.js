@@ -4,25 +4,25 @@ import { Menu } from "antd";
 const EyebrowMenu = ({ selectEyebrow }) => {
   const [eyebrows, setEyebrows] = useState([]);
   const fetchData = () => {
-    // fetch("/template", {
-    //   method: "GET",
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setEyebrows(data.templates);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    setEyebrows([
-      {
-        createat: "Sun, 08 Nov 2020 14:43:39 GMT",
-        id: 1,
-        name: "default eyebrow",
-        uri:
-          "https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png",
-      },
-    ]);
+    fetch("/template", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setEyebrows(data.templates);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // setEyebrows([
+    //   {
+    //     createat: "Sun, 08 Nov 2020 14:43:39 GMT",
+    //     id: 1,
+    //     name: "default eyebrow",
+    //     uri:
+    //       "https://jphacks2020.s3-ap-northeast-1.amazonaws.com/templates/mayu-1.png",
+    //   },
+    // ]);
   };
   useEffect(() => {
     fetchData();
