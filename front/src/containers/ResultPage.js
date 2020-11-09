@@ -11,35 +11,29 @@ const colors = require("./resultpage.json");
 
 const ResultPage = ({ personalColor }) => (
   <>
-    {!personalColor ? (
-      <Redirect to="/error" />
-    ) : (
-      <>
-        <Header />
-        <div
-          style={{
-            background:
-              "linear-gradient(rgb(225, 123, 224), rgb(175, 225, 246), white)",
-            height: window.innerHeight,
-            transform: "translateY(-70px)",
-          }}
-        >
-          <Result
-            icon={<HeartOutlined style={{ color: "white" }} />}
-            status="success"
-            title={"あなたのパーソナルカラーは" + personalColor}
-            subTitle={colors[personalColor]}
-            extra={[
-              <Recommendation personalColor={personalColor} />,
-              <Link to="/color">
-                <Button value="Try Again" icon="SearchOutlined" />
-              </Link>,
-            ]}
-          />
-        </div>
-      </>
-    )}
+    <Header />
+    <div
+      style={{
+        background:
+          "linear-gradient(rgb(225, 123, 224), rgb(175, 225, 246), white)",
+        height: window.innerHeight,
+        transform: "translateY(-70px)",
+      }}
+    >
+      <Result
+        icon={<HeartOutlined style={{ color: "white" }} />}
+        status="success"
+        title={"あなたのパーソナルカラーは" + personalColor}
+        subTitle={colors[personalColor]}
+        extra={[
+          <Recommendation personalColor={personalColor} />,
+          <Link to="/color">
+            <Button value="Try Again" icon="SearchOutlined" />
+          </Link>,
+        ]}
+      />
+    </div>
   </>
-);
+)
 
 export default ResultPage;
