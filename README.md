@@ -4,7 +4,19 @@
 
 ## 製品概要
 
+**動画**
+
 https://drive.google.com/file/d/1cSYKLTuz20LUQgDggwFbOcbyVrsodDtH/view?usp=sharing
+
+
+
+**試用版**
+
+https://dsr6soc5f8pbf.cloudfront.net/
+
+※ サーバーのスペックの問題でややタイムラグがあるかもしれません
+
+※ テンプレートの登録機能が利用できません
 
 ### 背景(製品開発のきっかけ、課題等）
 
@@ -47,16 +59,6 @@ MAKEU はメイクをリアルタイムにサポートするツールです。
 
 ### 活用した技術
 
-一応デプロイしてあります
-
-https://dsr6soc5f8pbf.cloudfront.net/
-
-※ サーバーのスペックの問題でややタイムラグがあるかもしれません
-
-※ 外部の DB への接続がうまくいかず、テンプレートの登録機能が利用できません
-
-
-
 #### フレームワーク・ライブラリ・モジュール
 
 - フロント
@@ -65,6 +67,10 @@ https://dsr6soc5f8pbf.cloudfront.net/
   - Flask, OpenCV, Dlib, Pytorch
 - インフラなど
   - Docker, AWS(ECS, S3, Cloud Front, RDS, ALB, Route53), Github Actions
+
+#### 構成図
+
+![sample_img](./arc.png)
 
 ### 独自技術
 
